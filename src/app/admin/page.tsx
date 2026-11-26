@@ -427,12 +427,12 @@ export default function AdminPage() {
             </p>
             <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
               <a
-                href="https://vercel.com/dashboard"
+                href="https://vercel.com/snehalchirra-2957/snehal-fyi/analytics"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1"
               >
-                Open Vercel Dashboard (snehal-fyi → Analytics)
+                Open Vercel Analytics Dashboard
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -846,12 +846,12 @@ export default function AdminPage() {
                 <li>
                   Go to your{" "}
                   <a
-                    href="https://vercel.com/dashboard"
+                    href="https://vercel.com/snehalchirra-2957/snehal-fyi/settings/environment-variables"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-indigo-400 underline hover:text-indigo-300"
                   >
-                    Vercel Dashboard → snehal-fyi → Settings → Environment Variables
+                    Vercel Settings → Environment Variables
                   </a>
                   , add:
                   <div className="mt-1 font-mono text-[11px] text-slate-300 bg-black/60 p-2 rounded-lg border border-white/5 space-y-0.5">
