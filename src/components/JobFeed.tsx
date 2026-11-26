@@ -146,13 +146,13 @@ export default function JobFeed({ initialJobs }: { initialJobs: Job[] }) {
               Reset Filters
             </button>
             <a
-              href="https://t.me/snehal.fyi"
+              href="https://t.me/snehal_fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#1f1f23] text-neutral-200 border border-white/10 text-xs font-medium px-4 py-2 rounded-full hover:text-white transition active:scale-95"
             >
               <Send className="w-3 h-3 text-sky-400" />
-              <span>Join @snehal.fyi on Telegram</span>
+              <span>Join @snehal_fyi on Telegram</span>
             </a>
           </div>
         </div>

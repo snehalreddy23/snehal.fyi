@@ -104,13 +104,13 @@ export default function HomePage() {
                 <span>Follow @snehal.fyi</span>
               </a>
               <a
-                href="https://t.me/snehal.fyi"
+                href="https://t.me/snehal_fyi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#161618] hover:bg-[#1c1c1f] text-white border border-white/10 px-5 py-2.5 rounded-full text-xs font-medium transition"
               >
                 <Send className="w-3 h-3 text-sky-400" />
-                <span>Join Telegram (@snehal.fyi)</span>
+                <span>Join Telegram (@snehal_fyi)</span>
               </a>
             </div>
           </div>

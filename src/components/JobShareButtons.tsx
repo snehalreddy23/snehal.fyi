@@ -35,7 +35,7 @@ export default function JobShareButtons({ job }: { job: Job }) {
   );
 
   const telegramShareText = encodeURIComponent(
-    `🚨 Hiring Alert: ${job.company} is hiring for ${job.role} (${job.salary})!\n\nApply directly: ${getJobUrl()}\n\nJoin our Telegram channel for direct alerts: @snehal.fyi`
+    `🚨 Hiring Alert: ${job.company} is hiring for ${job.role} (${job.salary})!\n\nApply directly: ${getJobUrl()}\n\nJoin our Telegram channel for direct alerts: @snehal_fyi`
   );
 
   return (

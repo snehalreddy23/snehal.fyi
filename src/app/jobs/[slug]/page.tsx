@@ -209,20 +209,20 @@ export default async function JobDetailPage({ params }: PageProps) {
             <span>Never miss an off-campus drive</span>
           </div>
           <h3 className="text-sm font-semibold text-white">
-            Join 10,000+ Freshers on Telegram (@snehal.fyi)
+            Join 10,000+ Freshers on Telegram (@snehal_fyi)
           </h3>
           <p className="text-xs text-neutral-400 leading-relaxed">
             Direct official application links for 2025–2027 batches, posted seconds after they go live.
           </p>
         </div>
         <a
-          href="https://t.me/snehal.fyi"
+          href="https://t.me/snehal_fyi"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 bg-[#1c1c1f] hover:bg-[#252529] text-white border border-white/10 px-5 py-2.5 rounded-full text-xs font-semibold flex-shrink-0 transition active:scale-95 shadow-sm"
         >
           <Send className="w-3 h-3 text-sky-400" />
-          <span>Join @snehal.fyi</span>
+          <span>Join @snehal_fyi</span>
         </a>
       </div>
 

@@ -26,12 +26,12 @@ export default function Footer() {
               About
             </Link>
             <a
-              href="https://t.me/snehal.fyi"
+              href="https://t.me/snehal_fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition flex items-center gap-1 text-neutral-300"
             >
-              <span>Telegram (@snehal.fyi)</span>
+              <span>Telegram (@snehal_fyi)</span>
             </a>
             <a
               href="https://instagram.com/snehal.fyi"

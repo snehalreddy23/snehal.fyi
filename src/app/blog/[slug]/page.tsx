@@ -213,13 +213,13 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
           <div className="flex flex-wrap items-center gap-2.5 pt-1">
             <a
-              href="https://t.me/snehal.fyi"
+              href="https://t.me/snehal_fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#1c1c1f] hover:bg-[#252529] text-white border border-white/10 text-xs font-semibold px-4 py-2 rounded-full active:scale-95 transition"
             >
               <Send className="w-3.5 h-3.5 text-sky-400" />
-              <span>Telegram (@snehal.fyi)</span>
+              <span>Telegram (@snehal_fyi)</span>
             </a>
             <a
               href="https://instagram.com/snehal.fyi"
