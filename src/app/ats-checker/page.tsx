@@ -540,6 +540,48 @@ Key Requirements:
               ))}
             </ul>
           </div>
+
+          {/* Want Us to Personally Tailor Your Resume? CTA */}
+          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-blue-500/30 bg-blue-500/[0.03] space-y-5 shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <div className="space-y-2 max-w-xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>1-on-1 Personalized Optimization</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Want Us to Personally Tailor Your Resume for This Role?
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                  Have your resume rewritten & matched to this exact Job Description by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We incorporate every missing skill naturally, rewrite your bullets with quantifiable impact, and guarantee a 90+ match score.
+                </p>
+                <div className="pt-1 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-400">
+                  <span className="flex items-center gap-1 text-neutral-300">✓ 100% JD Keyword Matching</span>
+                  <span className="flex items-center gap-1 text-neutral-300">✓ Google X-Y-Z Bullet Phrasing</span>
+                  <span className="flex items-center gap-1 text-neutral-300">✓ Delivered in 24–48 Hours</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-start sm:items-end gap-2 flex-shrink-0">
+                <div className="text-left sm:text-right">
+                  <span className="text-[10px] uppercase font-bold text-neutral-400 block tracking-wider">
+                    Fresher Student Price
+                  </span>
+                  <span className="text-2xl font-extrabold text-white">₹299</span>
+                  <span className="text-xs text-neutral-500 line-through ml-2">₹999</span>
+                </div>
+                <a
+                  href="https://forms.gle/example"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-neutral-200 font-semibold text-xs px-6 py-3 rounded-full transition shadow-lg w-full sm:w-auto active:scale-95"
+                >
+                  <span>Request Tailoring (Google Form)</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
@@ -724,34 +766,45 @@ Key Requirements:
             </div>
           </div>
 
-          {/* Download Free ATS Template CTA */}
-          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-white/[0.08] space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-lg font-bold text-white tracking-tight">
-                  Snehal's Standard 1-Page ATS Resume Template
+          {/* Want Us to Personally Tailor Your Resume? CTA */}
+          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-blue-500/30 bg-blue-500/[0.03] space-y-5 shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <div className="space-y-2 max-w-xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>1-on-1 Personalized Optimization</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Want Us to Personally Tailor Your Resume?
                 </h3>
-                <p className="text-xs text-neutral-400 mt-1 max-w-lg">
-                  Single-column, zero Canva icons, battle-tested layout engineered to pass Applicant Tracking Systems with 90+ scores.
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                  Get your resume rewritten & engineered by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We rewrite your project bullets using the Google X-Y-Z formula, fix all ATS parsing red flags, and guarantee a 90+ score.
                 </p>
+                <div className="pt-1 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-400">
+                  <span className="flex items-center gap-1 text-neutral-300">✓ 1-Page ATS Single Column</span>
+                  <span className="flex items-center gap-1 text-neutral-300">✓ Google X-Y-Z Bullet Phrasing</span>
+                  <span className="flex items-center gap-1 text-neutral-300">✓ Delivered in 24–48 Hours</span>
+                </div>
               </div>
 
-              <button
-                onClick={copyTemplate}
-                className="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 font-semibold text-xs px-5 py-2.5 rounded-full transition shadow flex-shrink-0"
-              >
-                {copiedTemplate ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-black" />
-                    <span>Template Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy Free Template</span>
-                  </>
-                )}
-              </button>
+              <div className="flex flex-col items-start sm:items-end gap-2 flex-shrink-0">
+                <div className="text-left sm:text-right">
+                  <span className="text-[10px] uppercase font-bold text-neutral-400 block tracking-wider">
+                    Fresher Student Price
+                  </span>
+                  <span className="text-2xl font-extrabold text-white">₹299</span>
+                  <span className="text-xs text-neutral-500 line-through ml-2">₹999</span>
+                </div>
+                <a
+                  href="https://forms.gle/example"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-neutral-200 font-semibold text-xs px-6 py-3 rounded-full transition shadow-lg w-full sm:w-auto active:scale-95"
+                >
+                  <span>Request Tailoring (Google Form)</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
