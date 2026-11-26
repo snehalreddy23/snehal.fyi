@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { Job } from "@/types";
 import JobCard from "./JobCard";
-import { Search, X } from "lucide-react";
+import { Search, X, Send } from "lucide-react";
 
 export default function JobFeed({ initialJobs }: { initialJobs: Job[] }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -131,17 +131,30 @@ export default function JobFeed({ initialJobs }: { initialJobs: Job[] }) {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-[#161618] rounded-3xl border border-white/[0.08] p-6 space-y-3">
-          <p className="text-base font-semibold text-white">No openings found</p>
-          <p className="text-xs text-neutral-400 max-w-sm mx-auto">
-            Try resetting your search query to see all available fresher opportunities.
-          </p>
-          <button
-            onClick={clearFilters}
-            className="inline-block bg-white text-black text-xs font-semibold px-4 py-2 rounded-full hover:bg-neutral-200 transition"
-          >
-            Reset Filters
-          </button>
+        <div className="text-center py-14 bg-[#161618] rounded-3xl border border-white/[0.08] p-6 space-y-4 max-w-md mx-auto">
+          <div className="space-y-1.5">
+            <p className="text-base font-semibold text-white">No matching openings found</p>
+            <p className="text-xs text-neutral-400 max-w-sm mx-auto leading-relaxed">
+              We post new verified fresher drives daily. Join our Telegram channel to get alerted the instant your target company opens.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+            <button
+              onClick={clearFilters}
+              className="bg-white text-black text-xs font-semibold px-4 py-2 rounded-full hover:bg-neutral-200 transition active:scale-95 shadow"
+            >
+              Reset Filters
+            </button>
+            <a
+              href="https://t.me/snehalfyi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-[#1f1f23] text-neutral-200 border border-white/10 text-xs font-medium px-4 py-2 rounded-full hover:text-white transition active:scale-95"
+            >
+              <Send className="w-3 h-3 text-sky-400" />
+              <span>Join @snehal.fyi on Telegram</span>
+            </a>
+          </div>
         </div>
       )}
     </div>

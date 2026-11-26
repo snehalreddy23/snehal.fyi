@@ -36,7 +36,12 @@ export default function AboutPage() {
 
           <div className="space-y-2 text-center sm:text-left flex-grow">
             <div>
-              <h2 className="text-lg font-semibold text-white">Snehal Reddy</h2>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+                <h2 className="text-lg font-semibold text-white">Snehal Reddy</h2>
+                <span className="text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-white/5 text-neutral-300 border border-white/10">
+                  Feel free to connect
+                </span>
+              </div>
               <p className="text-xs text-neutral-400">
                 Data Engineer (Snowflake) • Alumnus, Anurag University
               </p>
@@ -48,6 +53,10 @@ export default function AboutPage() {
 
             <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
               During my college years, I saw how stressful off-campus placements can be with endless ghost applications and paid consultancy scams. I created <strong className="text-white">snehal.fyi</strong> to curate verified openings, provide direct application links, and share actionable ATS resume blueprints.
+            </p>
+
+            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed pt-1">
+              Feel free to DM me on Instagram or message in our Telegram community if you ever need guidance on off-campus drives or your resume.
             </p>
 
             <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3">

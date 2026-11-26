@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   FileText,
@@ -15,8 +16,10 @@ import {
   Check,
   Target,
   ArrowRight,
+  RotateCcw,
 } from "lucide-react";
 import InstagramIcon from "@/components/InstagramIcon";
+import { JOBS_DATA } from "@/data/jobs";
 import {
   analyzeResume,
   analyzeJobMatch,
@@ -24,7 +27,9 @@ import {
   JobMatchReport,
 } from "@/utils/atsScanner";
 
-export default function ATSCheckerPage() {
+function ATSCheckerContent() {
+  const searchParams = useSearchParams();
+
   // Mode: "general" vs "job-specific"
   const [scannerMode, setScannerMode] = useState<"general" | "job-specific">("general");
 
@@ -39,7 +44,8 @@ export default function ATSCheckerPage() {
   const [isScanning, setIsScanning] = useState(false);
   const [generalReport, setGeneralReport] = useState<ATSReport | null>(null);
   const [matchReport, setMatchReport] = useState<JobMatchReport | null>(null);
-  const [copiedTemplate, setCopiedTemplate] = useState(false);
+  const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const [copiedReport, setCopiedReport] = useState(false);
 
   // Sample Resume
   const sampleResume = `SNEHAL REDDY
@@ -58,45 +64,71 @@ Core: Data Structures & Algorithms, DBMS, Operating Systems, OOP
 KEY PROJECTS
 Real-Time Distributed Pipeline Engine | Next.js, Python, Snowflake
 • Architected a real-time data ingestion pipeline processing 50,000+ records per minute with sub-second latency.
-• Engineered automated SQL validation queries, reducing data duplication errors by 42%.
+• Integrated Snowflake Data Cloud for automated partitioned transformations, reducing compute costs by 32%.
 • Deployed production service to cloud with 99.9% uptime. Live Demo: https://pipeline-demo.vercel.app
 
-Job Portal & Automation Platform | Next.js, Tailwind CSS, TypeScript
-• Developed an automated job board serving 5,000+ college freshers across 2025-2027 batches.
+Interactive Fresher Career Portal | Next.js, TypeScript, Tailwind CSS
+• Built responsive single-page web application achieving 99/100 Google Lighthouse performance score.
+• Engineered client-side text parsing engine processing 10,000+ resume tokens in <200ms with zero server latency.
 • Optimized search query execution time by 65% utilizing client-side memoized indexes.
-• Built end-to-end webhook integration for instant social alerts. Code: github.com/snehalreddy/job-board
 
-EXPERIENCE & LEADERSHIP
-Data Engineering Intern | CloudTech Solutions (June 2024 – Nov 2024)
-• Automated daily ETL workflows using Python and Snowflake, saving 15 engineering hours weekly.
-• Refactored legacy SQL stored procedures, cutting query execution costs by 28%.`;
+WORK EXPERIENCE / INTERNSHIP
+Data Engineering Intern | Snowflake Ecosystem Solutions (Jun 2024 – Nov 2024)
+• Built automated SQL queries and ETL pipelines aggregating analytics for 12 enterprise clients.
+• Reduced weekly report generation run time from 4 hours to 18 minutes using clustering keys.
+• Authored comprehensive developer documentation adopted by team of 8 junior engineers.
 
-  // Sample Job Description
-  const sampleJD = `Role: Associate Software Engineer / Data Engineer
-Company: Leading Tech Enterprise
-Eligibility: Batch 2025 / 2026 / 2027 B.Tech in Computer Science or IT. Minimum 60% with no backlogs.
+CERTIFICATIONS & ACHIEVEMENTS
+• Solved 350+ Data Structures problems across LeetCode & GeeksforGeeks
+• Top 5% in University Coding Hackathon (out of 450 participants)`;
 
-Key Requirements:
-• Hands-on proficiency in Python, Java, or C++.
-• Strong working knowledge of SQL, Database Management Systems (DBMS), and Data Structures & Algorithms (DSA).
-• Familiarity with cloud platforms (AWS, GCP, Snowflake) and Docker containerization.
-• Knowledge of Git version control, REST APIs, and microservices architecture.
-• Ability to build automated data pipelines or scalable web backend services.`;
+  const sampleJD = `Google Associate Cloud Engineer (Batch 2025, 2026)
+Location: Hyderabad / Bengaluru
+
+About the role:
+As an Associate Cloud Engineer, you will deploy applications, monitor operations, and manage enterprise solutions on Google Cloud Platform.
+
+Minimum qualifications:
+- Bachelor's degree in Computer Science, IT, or related technical field (Batches 2025 or 2026).
+- Experience with one or more general-purpose programming languages: Python, Java, or C++.
+- Basic knowledge of Cloud fundamentals (GCP, AWS, or Azure), Docker, Linux, and REST APIs.
+- Understanding of networking, databases (SQL, NoSQL), and distributed systems.
+
+Responsibilities:
+- Deploy and maintain containerized applications using Docker and Kubernetes.
+- Write clean, maintainable automation scripts in Python.
+- Monitor cloud performance metrics and troubleshoot system bottlenecks.`;
+
+  // Auto-load job if passed via query param (e.g. /ats-checker?job=google-associate-cloud-engineer)
+  useEffect(() => {
+    const jobSlug = searchParams.get("job");
+    if (jobSlug) {
+      const found = JOBS_DATA.find((j) => j.slug === jobSlug || j.id === jobSlug);
+      if (found) {
+        setScannerMode("job-specific");
+        const formattedJd = `${found.company} — ${found.role}\nLocation: ${found.location} | Batches: ${found.batch.join(", ")} | CTC: ${found.salary}\n\nJob Description:\n${found.description}\n\nKey Responsibilities:\n${found.responsibilities.join("\n")}\n\nRequirements & Skills:\n${found.requirements.join("\n")}\n\nEligibility:\n${found.eligibility.join("\n")}`;
+        setJobDescription(formattedJd);
+        if (resumeText.trim()) {
+          setMatchReport(analyzeJobMatch(resumeText, formattedJd));
+        }
+      }
+    }
+  }, [searchParams]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setFileName(file.name);
+    setIsScanning(true);
 
     if (file.type === "application/pdf") {
       try {
-        setIsScanning(true);
-        const pdfjsLib = await import("pdfjs-dist");
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+        const pdfjs = await import("pdfjs-dist");
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
         const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
         let fullText = "";
 
         for (let i = 1; i <= pdf.numPages; i++) {
@@ -131,6 +163,7 @@ Key Requirements:
         }
       };
       reader.readAsText(file);
+      setIsScanning(false);
     }
   };
 
@@ -167,10 +200,75 @@ Key Requirements:
     }
   };
 
-  const copyTemplate = () => {
-    navigator.clipboard.writeText(sampleResume);
-    setCopiedTemplate(true);
-    setTimeout(() => setCopiedTemplate(false), 2500);
+  const clearAll = () => {
+    setResumeText("");
+    setFileName(null);
+    setGeneralReport(null);
+    setMatchReport(null);
+    setCopiedPrompt(false);
+    setCopiedReport(false);
+  };
+
+  const copyChatGptPrompt = () => {
+    let prompt = "";
+    if (scannerMode === "job-specific" && matchReport) {
+      prompt = `I am a fresher applying for this job. I ran my resume through the snehal.fyi ATS scanner and got a match score of ${matchReport.matchScore}/100 (${matchReport.verdict}).
+
+TARGET JOB DESCRIPTION:
+${jobDescription.slice(0, 1500)}
+
+ATS SCAN FINDINGS:
+- Matched Skills: ${matchReport.matchedKeywords.join(", ") || "None"}
+- CRITICAL MISSING SKILLS TO WEAVE IN: ${matchReport.missingKeywords.join(", ") || "None"}
+- Specific ATS Recommendations:
+${matchReport.recommendations.map((r) => `  * ${r}`).join("\n")}
+
+MY CURRENT RESUME:
+${resumeText.slice(0, 2000)}
+
+INSTRUCTIONS:
+1. Rewrite my project bullet points using Google's X-Y-Z formula: "Accomplished [X] as measured by [Y], by doing [Z]" with measurable percentages and performance gains.
+2. Naturally weave in the missing skills without lying.
+3. Keep the format strictly single-column, 1 page, and ATS parseable.`;
+    } else if (generalReport) {
+      prompt = `I am a fresher engineering graduate. I audited my resume on snehal.fyi and received an ATS score of ${generalReport.overallScore}/100 (${generalReport.grade}).
+
+ATS AUDIT FINDINGS:
+- Critical Priority Fixes:
+${generalReport.criticalFixes.map((f: string) => `  * ${f}`).join("\n")}
+- Parameters Evaluated:
+${generalReport.parameters.map((p) => `  * ${p.name}: ${p.score}/${p.maxScore} (${p.status}) - ${p.summary}`).join("\n")}
+- Detected Technical Skills: ${generalReport.detectedSkills.join(", ")}
+- Missing/Suggested Keywords: ${generalReport.suggestedKeywords.join(", ")}
+
+MY CURRENT RESUME TEXT:
+${resumeText.slice(0, 2000)}
+
+INSTRUCTIONS:
+1. Rewrite my project and experience bullet points using the Google X-Y-Z formula ("Accomplished [X] as measured by [Y], by doing [Z]").
+2. Ensure every bullet starts with a strong action verb and includes measurable metrics.
+3. Naturally incorporate the suggested keywords and ensure the layout remains strictly 1-page and single-column ATS friendly.`;
+    }
+
+    if (prompt) {
+      navigator.clipboard.writeText(prompt);
+      setCopiedPrompt(true);
+      setTimeout(() => setCopiedPrompt(false), 3000);
+    }
+  };
+
+  const copyReportSummary = () => {
+    let reportText = "";
+    if (scannerMode === "job-specific" && matchReport) {
+      reportText = `snehal.fyi Job Match ATS Report\nOverall Match: ${matchReport.matchScore}% (${matchReport.verdict})\nMatched Skills: ${matchReport.matchedKeywords.join(", ")}\nMissing Skills: ${matchReport.missingKeywords.join(", ")}\n\nRecommendations:\n${matchReport.recommendations.join("\n")}`;
+    } else if (generalReport) {
+      reportText = `snehal.fyi General ATS Audit Report\nOverall Score: ${generalReport.overallScore}/100 (${generalReport.grade})\n\nParameters Breakdown:\n${generalReport.parameters.map((p) => `- ${p.name}: ${p.score}/${p.maxScore} (${p.status})`).join("\n")}\n\nCritical Priority Fixes:\n${generalReport.criticalFixes.join("\n")}\n\nDetected Skills: ${generalReport.detectedSkills.join(", ")}`;
+    }
+    if (reportText) {
+      navigator.clipboard.writeText(reportText);
+      setCopiedReport(true);
+      setTimeout(() => setCopiedReport(false), 2500);
+    }
   };
 
   const shareScore = () => {
@@ -250,7 +348,7 @@ Key Requirements:
       <div className="apple-glass rounded-3xl p-5 sm:p-8 space-y-6 border border-white/[0.08] shadow-2xl">
         {/* If Job-Specific Mode: Show Job Description Input first */}
         {scannerMode === "job-specific" && (
-          <div className="space-y-2 animate-in fade-in duration-300">
+          <div className="space-y-2.5 animate-in fade-in duration-300">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold text-neutral-300 uppercase tracking-wider flex items-center gap-1.5">
                 <Target className="w-3.5 h-3.5 text-blue-400" />
@@ -264,12 +362,34 @@ Key Requirements:
               </button>
             </div>
             <textarea
-              rows={5}
+              rows={4}
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               placeholder="Paste the job description from Google, Amazon, TCS, or LinkedIn here (requirements, qualifications, skills)..."
               className="w-full bg-[#121214] border border-white/[0.08] focus:border-white/20 rounded-2xl p-4 text-xs sm:text-sm text-neutral-200 placeholder-neutral-500 outline-none leading-relaxed"
             />
+
+            {/* Quick Load live jobs from snehal.fyi */}
+            <div className="pt-1 flex flex-wrap items-center gap-1.5">
+              <span className="text-[11px] text-neutral-400">Quick-load opening:</span>
+              {JOBS_DATA.map((job) => (
+                <button
+                  key={job.id}
+                  type="button"
+                  onClick={() => {
+                    const jd = `${job.company} — ${job.role}\nLocation: ${job.location} | Batches: ${job.batch.join(", ")} | CTC: ${job.salary}\n\nJob Description:\n${job.description}\n\nKey Responsibilities:\n${job.responsibilities.join("\n")}\n\nRequirements & Skills:\n${job.requirements.join("\n")}\n\nEligibility:\n${job.eligibility.join("\n")}`;
+                    setJobDescription(jd);
+                    if (resumeText.trim()) {
+                      setMatchReport(analyzeJobMatch(resumeText, jd));
+                    }
+                  }}
+                  className="text-[11px] px-2.5 py-1 rounded-lg bg-white/[0.05] hover:bg-white/10 text-neutral-300 hover:text-white border border-white/[0.08] transition flex items-center gap-1"
+                >
+                  <span className="font-medium text-white">{job.company}</span>
+                  <span className="text-neutral-500">({job.role.split(" ")[0]})</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
@@ -310,36 +430,50 @@ Key Requirements:
           </div>
         )}
 
-        {/* Resume Input Section */}
+        {/* Resume Input Area */}
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">
-              {scannerMode === "job-specific" ? "Step 2: Add Your Resume" : "Paste or Upload Your Resume"}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <label className="text-xs font-semibold text-neutral-300 uppercase tracking-wider block">
+              {scannerMode === "job-specific" ? "Step 2: " : ""}Upload or Paste Your Resume
             </label>
-          </div>
 
-          {/* Toggle Tab */}
-          <div className="inline-flex items-center bg-[#161618] p-1 rounded-xl border border-white/[0.06] text-xs font-medium w-full sm:w-auto">
-            <button
-              onClick={() => setActiveTab("paste")}
-              className={`flex-1 sm:flex-none px-4 py-1.5 rounded-lg transition-all ${
-                activeTab === "paste"
-                  ? "bg-white text-black font-semibold shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Paste Resume Text
-            </button>
-            <button
-              onClick={() => setActiveTab("upload")}
-              className={`flex-1 sm:flex-none px-4 py-1.5 rounded-lg transition-all ${
-                activeTab === "upload"
-                  ? "bg-white text-black font-semibold shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Upload PDF / File
-            </button>
+            <div className="flex items-center gap-2">
+              {(resumeText || fileName || generalReport || matchReport) && (
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-400 hover:text-rose-400 transition px-2.5 py-1 rounded-lg hover:bg-rose-500/10"
+                  title="Clear resume input and scan results"
+                >
+                  <RotateCcw className="w-3 h-3 text-rose-400" />
+                  <span>Clear All</span>
+                </button>
+              )}
+
+              {/* Sub-tabs: Paste vs Upload */}
+              <div className="inline-flex items-center bg-[#161618] p-1 rounded-xl border border-white/[0.06] text-xs font-medium w-full sm:w-auto">
+                <button
+                  onClick={() => setActiveTab("paste")}
+                  className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg transition ${
+                    activeTab === "paste"
+                      ? "bg-white/10 text-white font-semibold"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  Paste Text
+                </button>
+                <button
+                  onClick={() => setActiveTab("upload")}
+                  className={`flex-1 sm:flex-none px-3.5 py-1.5 rounded-lg transition ${
+                    activeTab === "upload"
+                      ? "bg-white/10 text-white font-semibold"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  Upload PDF
+                </button>
+              </div>
+            </div>
           </div>
 
           {activeTab === "paste" ? (
@@ -347,55 +481,60 @@ Key Requirements:
               rows={8}
               value={resumeText}
               onChange={(e) => setResumeText(e.target.value)}
-              placeholder="Paste your full resume text here (Education, Skills, Projects, Experience)..."
+              placeholder="Paste the full text of your resume here (Education, Skills, Projects, Experience, Links)..."
               className="w-full bg-[#121214] border border-white/[0.08] focus:border-white/20 rounded-2xl p-4 text-xs sm:text-sm text-neutral-200 placeholder-neutral-500 outline-none leading-relaxed"
             />
           ) : (
-            <div className="border-2 border-dashed border-white/[0.1] hover:border-white/25 rounded-2xl p-8 sm:p-10 text-center bg-[#121214]/50 transition cursor-pointer relative">
-              <input
-                type="file"
-                accept=".pdf,.txt"
-                onChange={handleFileUpload}
-                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-              />
-              <div className="space-y-2 pointer-events-none">
-                <div className="w-10 h-10 rounded-2xl bg-white/[0.06] flex items-center justify-center mx-auto text-neutral-300">
-                  <Upload className="w-5 h-5" />
-                </div>
+            <div className="border border-dashed border-white/15 hover:border-white/30 rounded-2xl p-8 sm:p-12 text-center transition bg-[#121214] space-y-3">
+              <div className="w-12 h-12 rounded-full bg-white/5 mx-auto flex items-center justify-center text-neutral-300">
+                <Upload className="w-5 h-5 text-blue-400" />
+              </div>
+              <div>
                 <p className="text-sm font-semibold text-white">
-                  {fileName ? fileName : "Drop your PDF resume here"}
+                  {fileName ? fileName : "Upload your resume PDF"}
                 </p>
-                <p className="text-xs text-neutral-500">
-                  Supports .pdf and .txt (parsed securely in your browser)
+                <p className="text-xs text-neutral-400 mt-1">
+                  100% private. Files never leave your browser or touch any server.
                 </p>
+              </div>
+              <div>
+                <label className="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition shadow">
+                  <span>Browse PDF</span>
+                  <input
+                    type="file"
+                    accept=".pdf,.txt"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                </label>
               </div>
             </div>
           )}
         </div>
 
         {/* Scan Action Button */}
-        <div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-white/[0.06]">
+          <p className="text-neutral-500 text-[11px] text-center sm:text-left">
+            Privacy Guaranteed: Scanned instantly via in-browser regex parsing.
+          </p>
+
           <button
             onClick={runScan}
-            disabled={!resumeText.trim() || isScanning}
-            className="w-full bg-white text-black hover:bg-neutral-200 disabled:opacity-40 disabled:cursor-not-allowed font-semibold py-3.5 px-6 rounded-2xl text-sm transition shadow-lg flex items-center justify-center gap-2 active:scale-[0.99]"
+            disabled={isScanning || !resumeText.trim()}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-neutral-200 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm px-7 py-3 rounded-full transition shadow-lg active:scale-95"
           >
             {isScanning ? (
               <>
                 <RefreshCw className="w-4 h-4 animate-spin" />
-                <span>
-                  {scannerMode === "general"
-                    ? "Auditing Across 7 Dimensions..."
-                    : "Cross-Matching Resume Against JD..."}
-                </span>
+                <span>Running ATS Engine...</span>
               </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 text-blue-600" />
                 <span>
-                  {scannerMode === "general"
-                    ? "Run General ATS Audit (Free)"
-                    : "Calculate Match & Keyword Gaps (Free)"}
+                  {scannerMode === "job-specific"
+                    ? "Calculate Job Match & Skills Gap"
+                    : "Audit My Resume Now"}
                 </span>
               </>
             )}
@@ -403,30 +542,63 @@ Key Requirements:
         </div>
       </div>
 
-      {/* ========================================================= */}
-      {/* RESULTS: MODE 2 - JOB SPECIFIC MATCHER RESULTS */}
-      {/* ========================================================= */}
+      {/* ============================================================ */}
+      {/* JOB-SPECIFIC REPORT OUTPUT */}
+      {/* ============================================================ */}
       {scannerMode === "job-specific" && matchReport && (
-        <div className="space-y-8 animate-in fade-in duration-500">
-          {/* Match Score Hero Card */}
-          <div className="apple-glass rounded-3xl p-6 sm:p-10 border border-white/[0.1] shadow-2xl relative overflow-hidden">
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          {/* Main Score Hero */}
+          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-white/[0.08] shadow-2xl">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-6 text-center sm:text-left">
-                {/* Score Dial */}
-                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-[#141417] border-2 border-white/10 flex flex-col items-center justify-center shadow-inner relative flex-shrink-0">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    {matchReport.matchScore}%
-                  </span>
-                  <span className="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">
-                    Relevance
-                  </span>
+              <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+                {/* Match Ring */}
+                <div className="relative w-28 h-28 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      stroke="rgba(255,255,255,0.08)"
+                      strokeWidth="8"
+                      fill="transparent"
+                    />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      stroke={
+                        matchReport.matchScore >= 80
+                          ? "#10b981"
+                          : matchReport.matchScore >= 60
+                          ? "#3b82f6"
+                          : "#f43f5e"
+                      }
+                      strokeWidth="8"
+                      strokeDasharray={`${2 * Math.PI * 40}`}
+                      strokeDashoffset={`${
+                        2 * Math.PI * 40 * (1 - matchReport.matchScore / 100)
+                      }`}
+                      strokeLinecap="round"
+                      fill="transparent"
+                      className="transition-all duration-1000 ease-out"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-3xl font-extrabold text-white">
+                      {matchReport.matchScore}%
+                    </span>
+                    <span className="text-[10px] text-neutral-400 uppercase font-medium">
+                      JD Match
+                    </span>
+                  </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-neutral-400">
-                    JD Match Verdict
-                  </span>
-                  <h2 className={`text-xl sm:text-2xl font-bold ${matchReport.verdictColor} tracking-tight`}>
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-1.5 text-xs text-blue-400 font-medium">
+                    <Target className="w-3.5 h-3.5" />
+                    <span>Cross-Match Analysis</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     {matchReport.verdict}
                   </h2>
                   <p className="text-xs text-neutral-400 max-w-sm leading-relaxed">
@@ -435,23 +607,44 @@ Key Requirements:
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+              {/* Action Buttons: AI Prompt + Report Copy + Clear + Share */}
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
+                <button
+                  onClick={copyChatGptPrompt}
+                  className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-full transition shadow-sm active:scale-95"
+                  title="Copies an engineered prompt with your results for ChatGPT/Claude"
+                >
+                  {copiedPrompt ? <Check className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5" />}
+                  <span>{copiedPrompt ? "Prompt Copied for AI!" : "Copy ChatGPT Prompt"}</span>
+                </button>
+
+                <button
+                  onClick={copyReportSummary}
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-200 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                >
+                  {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedReport ? "Copied!" : "Copy Report"}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    clearAll();
+                    window.scrollTo({ top: 220, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                  title="Clear resume and start fresh"
+                >
+                  <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Clear</span>
+                </button>
+
                 <button
                   onClick={shareScore}
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs px-5 py-2.5 rounded-full transition shadow"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
                 >
                   <Share2 className="w-3.5 h-3.5" />
-                  <span>Share Result</span>
+                  <span>Share</span>
                 </button>
-                <a
-                  href="https://instagram.com/snehal.fyi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#161618] hover:bg-[#1f1f23] text-white border border-white/10 font-medium text-xs px-4 py-2.5 rounded-full transition"
-                >
-                  <InstagramIcon className="w-3.5 h-3.5" />
-                  <span>Follow @snehal.fyi</span>
-                </a>
               </div>
             </div>
 
@@ -482,7 +675,7 @@ Key Requirements:
             <div className="apple-card rounded-2xl p-5 space-y-3 border border-emerald-500/20 bg-emerald-500/[0.02]">
               <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs uppercase tracking-wider">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Matched Skills in Your Resume ({matchReport.matchedKeywords.length})</span>
+                <span>Matched Technical Keywords ({matchReport.matchedKeywords.length})</span>
               </div>
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {matchReport.matchedKeywords.length > 0 ? (
@@ -495,7 +688,7 @@ Key Requirements:
                     </span>
                   ))
                 ) : (
-                  <p className="text-xs text-neutral-500">No direct technical keyword overlap found.</p>
+                  <p className="text-xs text-neutral-400">No overlapping technical skills detected.</p>
                 )}
               </div>
             </div>
@@ -585,54 +778,125 @@ Key Requirements:
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* RESULTS: MODE 1 - GENERAL ATS AUDIT RESULTS (7 DIMS) */}
-      {/* ========================================================= */}
+      {/* ============================================================ */}
+      {/* GENERAL ATS AUDIT REPORT OUTPUT */}
+      {/* ============================================================ */}
       {scannerMode === "general" && generalReport && (
-        <div className="space-y-8 animate-in fade-in duration-500">
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
           {/* Main Score Hero Card */}
-          <div className="apple-glass rounded-3xl p-6 sm:p-10 border border-white/[0.1] shadow-2xl relative overflow-hidden">
+          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-white/[0.08] shadow-2xl">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-6 text-center sm:text-left">
-                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-[#141417] border-2 border-white/10 flex flex-col items-center justify-center shadow-inner relative flex-shrink-0">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    {generalReport.overallScore}
-                  </span>
-                  <span className="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">
-                    out of 100
-                  </span>
+              <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+                {/* Score Gauge */}
+                <div className="relative w-28 h-28 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      stroke="rgba(255,255,255,0.08)"
+                      strokeWidth="8"
+                      fill="transparent"
+                    />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      stroke={
+                        generalReport.overallScore >= 80
+                          ? "#10b981"
+                          : generalReport.overallScore >= 60
+                          ? "#3b82f6"
+                          : "#f43f5e"
+                      }
+                      strokeWidth="8"
+                      strokeDasharray={`${2 * Math.PI * 40}`}
+                      strokeDashoffset={`${
+                        2 * Math.PI * 40 * (1 - generalReport.overallScore / 100)
+                      }`}
+                      strokeLinecap="round"
+                      fill="transparent"
+                      className="transition-all duration-1000 ease-out"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-3xl font-extrabold text-white">
+                      {generalReport.overallScore}
+                    </span>
+                    <span className="text-[10px] text-neutral-400 uppercase font-medium">
+                      out of 100
+                    </span>
+                  </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-neutral-400">
-                    General ATS Audit Verdict
-                  </span>
-                  <h2 className={`text-xl sm:text-2xl font-bold ${generalReport.gradeColor} tracking-tight`}>
-                    {generalReport.grade}
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2">
+                    <span
+                      className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
+                        generalReport.overallScore >= 80
+                          ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
+                          : generalReport.overallScore >= 60
+                          ? "bg-blue-500/10 text-blue-300 border-blue-500/30"
+                          : "bg-rose-500/10 text-rose-300 border-rose-500/30"
+                      }`}
+                    >
+                      Grade: {generalReport.grade}
+                    </span>
+                    <span className="text-xs text-neutral-400">
+                      Target: {targetRole.toUpperCase()}
+                    </span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    {generalReport.overallScore >= 80
+                      ? "Top 5% — ATS Interview Ready"
+                      : generalReport.overallScore >= 60
+                      ? "Competitive — Minor Polish Needed"
+                      : "Critical Fixes Required to Pass ATS"}
                   </h2>
                   <p className="text-xs text-neutral-400 max-w-sm leading-relaxed">
-                    Evaluated across 7 foundational dimensions: Metrics, Action Verbs, Sections, Keywords, Layout Safety, Bullets, and Proof of Work.
+                    Evaluated across 7 core Applicant Tracking System parameters.
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+              {/* Action Buttons: AI Prompt + Report Copy + Clear + Share */}
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
+                <button
+                  onClick={copyChatGptPrompt}
+                  className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-full transition shadow-sm active:scale-95"
+                  title="Copies an engineered prompt with your results for ChatGPT/Claude"
+                >
+                  {copiedPrompt ? <Check className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5" />}
+                  <span>{copiedPrompt ? "Prompt Copied for AI!" : "Copy ChatGPT Prompt"}</span>
+                </button>
+
+                <button
+                  onClick={copyReportSummary}
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-200 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                >
+                  {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedReport ? "Copied!" : "Copy Report"}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    clearAll();
+                    window.scrollTo({ top: 220, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                  title="Clear resume and start fresh"
+                >
+                  <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Clear</span>
+                </button>
+
                 <button
                   onClick={shareScore}
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs px-5 py-2.5 rounded-full transition shadow"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
                 >
                   <Share2 className="w-3.5 h-3.5" />
-                  <span>Share on WhatsApp</span>
+                  <span>Share</span>
                 </button>
-                <a
-                  href="https://instagram.com/snehal.fyi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#161618] hover:bg-[#1f1f23] text-white border border-white/10 font-medium text-xs px-4 py-2.5 rounded-full transition"
-                >
-                  <InstagramIcon className="w-3.5 h-3.5" />
-                  <span>Follow @snehal.fyi</span>
-                </a>
               </div>
             </div>
 
@@ -643,124 +907,89 @@ Key Requirements:
                 <p className="font-semibold text-white">{generalReport.wordCount} words</p>
               </div>
               <div className="apple-card p-3 rounded-xl">
-                <span className="text-neutral-500 text-[11px] block">Ideal Page Count</span>
-                <p className="font-semibold text-white">
-                  {generalReport.wordCount > 800 ? "⚠️ Risks 2 Pages" : "✅ 1 Page (Optimal)"}
-                </p>
+                <span className="text-neutral-500 text-[11px] block">Reading Time</span>
+                <p className="font-semibold text-emerald-400">~{generalReport.readingTimeMinutes} min</p>
               </div>
               <div className="apple-card p-3 rounded-xl">
-                <span className="text-neutral-500 text-[11px] block">Recruiter Read Time</span>
-                <p className="font-semibold text-white">{generalReport.readingTimeMinutes} min scan</p>
+                <span className="text-neutral-500 text-[11px] block">Detected Skills</span>
+                <p className="font-semibold text-blue-400">{generalReport.detectedSkills.length} Found</p>
               </div>
               <div className="apple-card p-3 rounded-xl">
-                <span className="text-neutral-500 text-[11px] block">Keyword Matches</span>
-                <p className="font-semibold text-emerald-400">{generalReport.detectedSkills.length} Tech Skills</p>
+                <span className="text-neutral-500 text-[11px] block">Missing Skills</span>
+                <p className="font-semibold text-rose-400">{generalReport.suggestedKeywords.length} Recommended</p>
               </div>
             </div>
           </div>
 
-          {/* Top Priority Fixes Box */}
+          {/* Top Priority Action Items */}
           {generalReport.criticalFixes.length > 0 && (
-            <div className="apple-card rounded-2xl p-5 sm:p-6 border border-amber-500/30 bg-amber-500/[0.03] space-y-3">
-              <div className="flex items-center gap-2 text-amber-400 font-semibold text-xs uppercase tracking-wider">
+            <div className="apple-card rounded-2xl p-5 sm:p-6 space-y-3 border border-rose-500/20 bg-rose-500/[0.02]">
+              <h3 className="font-semibold text-white text-sm uppercase tracking-wider flex items-center gap-1.5 text-rose-400">
                 <AlertTriangle className="w-4 h-4" />
-                <span>Top Priority Fixes to Boost Your Score</span>
-              </div>
+                <span>Priority Action Items to Beat ATS Filters</span>
+              </h3>
               <ul className="space-y-2 text-xs sm:text-sm text-neutral-300">
-                {generalReport.criticalFixes.map((fix, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
-                      {idx + 1}
+                {generalReport.criticalFixes.map((tip: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                      {i + 1}
                     </span>
-                    <span>{fix}</span>
+                    <span className="leading-relaxed">{tip}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* Detailed 7 Parameter Breakdown */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white tracking-tight">
-              Detailed Breakdown Across 7 Dimensions
+          {/* Detailed 7-Parameter Breakdown Cards */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider px-1">
+              7-Dimension ATS Evaluation
             </h3>
-
-            <div className="space-y-3.5">
-              {generalReport.parameters.map((param, idx) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              {generalReport.parameters.map((param) => (
                 <div
-                  key={idx}
-                  className="apple-card rounded-2xl p-5 space-y-3 border border-white/[0.06]"
+                  key={param.name}
+                  className="apple-card p-4 sm:p-5 rounded-2xl space-y-2.5 flex flex-col justify-between"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-semibold text-white text-sm sm:text-base">
-                          {param.name}
-                        </h4>
-                        <span
-                          className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                            param.status === "excellent"
-                              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                              : param.status === "good"
-                              ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
-                              : "bg-rose-500/10 text-rose-400 border border-rose-500/20"
-                          }`}
-                        >
-                          {param.score} / {param.maxScore} pts
-                        </span>
-                      </div>
-                      <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
-                        {param.summary}
-                      </p>
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-white">{param.name}</span>
+                      <span
+                        className={`text-xs font-bold ${
+                          param.score / param.maxScore >= 0.8
+                            ? "text-emerald-400"
+                            : param.score / param.maxScore >= 0.5
+                            ? "text-blue-400"
+                            : "text-rose-400"
+                        }`}
+                      >
+                        {param.score}/{param.maxScore}
+                      </span>
+                    </div>
+                    {/* Progress Bar */}
+                    <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
+                      <div
+                        className={`h-full transition-all duration-500 ${
+                          param.score / param.maxScore >= 0.8
+                            ? "bg-emerald-500"
+                            : param.score / param.maxScore >= 0.5
+                            ? "bg-blue-500"
+                            : "bg-rose-500"
+                        }`}
+                        style={{ width: `${(param.score / param.maxScore) * 100}%` }}
+                      />
                     </div>
                   </div>
 
-                  {/* Progress bar */}
-                  <div className="w-full bg-white/[0.05] h-1.5 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-500 ${
-                        param.status === "excellent"
-                          ? "bg-emerald-400"
-                          : param.status === "good"
-                          ? "bg-blue-400"
-                          : "bg-rose-400"
-                      }`}
-                      style={{
-                        width: `${Math.round((param.score / param.maxScore) * 100)}%`,
-                      }}
-                    />
-                  </div>
+                  <p className="text-xs text-neutral-300 leading-relaxed">{param.summary}</p>
 
-                  {/* Strengths & Improvements */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-                    {param.strengths.length > 0 && (
-                      <div className="space-y-1.5 bg-emerald-500/[0.03] p-3 rounded-xl border border-emerald-500/10">
-                        <span className="text-emerald-400 font-semibold flex items-center gap-1 text-[11px]">
-                          <CheckCircle2 className="w-3 h-3" />
-                          What You Did Well
-                        </span>
-                        <ul className="space-y-1 text-neutral-300">
-                          {param.strengths.map((s, i) => (
-                            <li key={i}>• {s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {param.improvements.length > 0 && (
-                      <div className="space-y-1.5 bg-rose-500/[0.03] p-3 rounded-xl border border-rose-500/10">
-                        <span className="text-rose-400 font-semibold flex items-center gap-1 text-[11px]">
-                          <XCircle className="w-3 h-3" />
-                          How to Improve
-                        </span>
-                        <ul className="space-y-1 text-neutral-300">
-                          {param.improvements.map((imp, i) => (
-                            <li key={i}>• {imp}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
+                  {param.improvements.length > 0 && (
+                    <div className="pt-2 border-t border-white/[0.05] text-[11px] text-neutral-400 flex items-start gap-1">
+                      <span className="text-rose-400 flex-shrink-0">Fix:</span>
+                      <span>{param.improvements[0]}</span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -810,5 +1039,19 @@ Key Requirements:
         </div>
       )}
     </div>
+  );
+}
+
+export default function ATSCheckerPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black text-white flex items-center justify-center text-xs text-neutral-400">
+          Loading ATS Scanner...
+        </div>
+      }
+    >
+      <ATSCheckerContent />
+    </Suspense>
   );
 }

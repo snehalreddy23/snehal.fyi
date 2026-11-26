@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Job } from "@/types";
-import { MapPin, ArrowRight } from "lucide-react";
+import { MapPin, ArrowRight, Sparkles } from "lucide-react";
 
 export default function JobCard({ job }: { job: Job }) {
   return (
@@ -70,13 +70,22 @@ export default function JobCard({ job }: { job: Job }) {
           Posted {job.postedDate}
         </span>
 
-        <Link
-          href={`/jobs/${job.slug}`}
-          className="inline-flex items-center gap-1 text-white hover:text-blue-400 font-medium transition text-xs py-1"
-        >
-          <span>View Details</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href={`/ats-checker?job=${job.slug}`}
+            className="inline-flex items-center gap-1 text-neutral-400 hover:text-blue-400 font-medium transition text-[11px] py-1"
+          >
+            <Sparkles className="w-3 h-3 text-blue-400" />
+            <span>ATS Match</span>
+          </Link>
+          <Link
+            href={`/jobs/${job.slug}`}
+            className="inline-flex items-center gap-1 text-white hover:text-blue-400 font-medium transition text-xs py-1"
+          >
+            <span>View</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+        </div>
       </div>
     </div>
   );

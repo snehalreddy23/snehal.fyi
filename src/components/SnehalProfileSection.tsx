@@ -32,8 +32,8 @@ export default function SnehalProfileSection() {
                 <h3 className="text-base sm:text-lg font-semibold text-white tracking-tight">
                   Snehal Reddy
                 </h3>
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/5 text-neutral-300 border border-white/10">
-                  Founder
+                <span className="text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-white/5 text-neutral-300 border border-white/10">
+                  Feel free to connect
                 </span>
               </div>
               <p className="text-xs text-neutral-400 font-medium">
