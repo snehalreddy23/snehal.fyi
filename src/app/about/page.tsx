@@ -67,7 +67,7 @@ export default function AboutPage() {
                 className="inline-flex items-center gap-1.5 bg-neutral-900 text-neutral-300 border border-white/10 px-4 py-2 rounded-full text-xs font-medium hover:text-white transition"
               >
                 <Send className="w-3 h-3 text-sky-400" />
-                <span>Telegram Alerts</span>
+                <span>Telegram (@snehal.fyi)</span>
               </a>
             </div>
           </div>
