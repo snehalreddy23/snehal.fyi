@@ -7,6 +7,7 @@ import {
   ExternalLink,
   ArrowLeft,
   Sparkles,
+  Send,
 } from "lucide-react";
 import JobShareButtons from "@/components/JobShareButtons";
 
@@ -181,6 +182,31 @@ export default async function JobDetailPage({ params }: PageProps) {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Telegram Community Callout */}
+      <div className="apple-card rounded-2xl p-5 sm:p-6 border border-white/[0.08] bg-[#121214] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-400">
+            <Send className="w-3 h-3" />
+            <span>Never miss an off-campus drive</span>
+          </div>
+          <h3 className="text-sm font-semibold text-white">
+            Join 10,000+ Freshers on Telegram (@snehal.fyi)
+          </h3>
+          <p className="text-xs text-neutral-400 leading-relaxed">
+            Direct official application links for 2025–2027 batches, posted seconds after they go live.
+          </p>
+        </div>
+        <a
+          href="https://t.me/snehalfyi"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 bg-[#1c1c1f] hover:bg-[#252529] text-white border border-white/10 px-5 py-2.5 rounded-full text-xs font-semibold flex-shrink-0 transition active:scale-95 shadow-sm"
+        >
+          <Send className="w-3 h-3 text-sky-400" />
+          <span>Join @snehal.fyi</span>
+        </a>
       </div>
 
       {/* Sticky Mobile Apply Bar - Safe Area Inset Aware for iPhones */}

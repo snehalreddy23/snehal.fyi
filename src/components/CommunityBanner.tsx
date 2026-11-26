@@ -18,10 +18,10 @@ export default function CommunityBanner() {
             href="https://t.me/snehalfyi"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-300 hover:text-white transition flex items-center gap-1 text-[11px] font-medium bg-white/[0.06] px-2.5 py-0.5 rounded-full"
+            className="text-neutral-300 hover:text-white transition flex items-center gap-1.5 text-[11px] font-medium bg-white/[0.06] hover:bg-white/10 border border-white/[0.08] px-2.5 py-0.5 rounded-full"
           >
             <Send className="w-2.5 h-2.5 text-sky-400" />
-            <span>Telegram</span>
+            <span>Telegram @snehal.fyi</span>
             <ArrowRight className="w-2.5 h-2.5 text-neutral-500" />
           </a>
         </div>

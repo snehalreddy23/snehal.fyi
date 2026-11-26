@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Briefcase, FileText, Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import { Briefcase, FileText, Menu, X, ArrowUpRight, Sparkles, Send } from "lucide-react";
 import InstagramIcon from "./InstagramIcon";
 
 export default function Navbar() {
@@ -49,8 +49,17 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Right Action: Instagram Follow */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Right Action: Telegram & Instagram */}
+          <div className="hidden md:flex items-center gap-2.5">
+            <a
+              href="https://t.me/snehalfyi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-300 hover:text-white border border-white/10 px-3 py-1.5 rounded-full text-xs font-medium transition"
+            >
+              <Send className="w-3 h-3 text-sky-400" />
+              <span>@snehal.fyi</span>
+            </a>
             <a
               href="https://instagram.com/snehal.fyi"
               target="_blank"
@@ -122,12 +131,23 @@ export default function Navbar() {
             <span>About Snehal Reddy</span>
             <ArrowUpRight className="w-4 h-4 text-neutral-500" />
           </Link>
-          <div className="pt-2">
+          <div className="pt-2 space-y-2">
+            <a
+              href="https://t.me/snehalfyi"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full flex items-center justify-center gap-2 bg-[#161618] border border-white/10 text-white py-2.5 rounded-full font-medium text-xs active:scale-[0.98] transition"
+            >
+              <Send className="w-3.5 h-3.5 text-sky-400" />
+              <span>Join Telegram Channel (@snehal.fyi)</span>
+            </a>
             <a
               href="https://instagram.com/snehal.fyi"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-full font-semibold text-xs active:scale-[0.98] transition"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full flex items-center justify-center gap-2 bg-white text-black py-2.5 rounded-full font-semibold text-xs active:scale-[0.98] transition"
             >
               <InstagramIcon className="w-4 h-4" />
               <span>Follow @snehal.fyi on Instagram</span>

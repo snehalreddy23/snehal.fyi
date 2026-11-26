@@ -9,6 +9,7 @@ import {
   Share2,
   FileText,
   CheckCircle2,
+  Send,
 } from "lucide-react";
 import InstagramIcon from "@/components/InstagramIcon";
 
@@ -92,23 +93,36 @@ export default async function BlogPostPage({ params }: Props) {
           {post.content}
         </div>
 
-        {/* Action Callout */}
-        <div className="mt-8 pt-6 border-t border-slate-800/80 bg-indigo-950/40 -mx-6 sm:-mx-10 -mb-6 sm:-mb-10 p-6 sm:p-8 rounded-b-3xl space-y-3">
-          <div className="flex items-center gap-2 text-white font-bold text-sm">
-            <InstagramIcon className="w-4 h-4 text-pink-400" />
-            <span>Follow @snehal.fyi on Instagram</span>
+        {/* Community Callout */}
+        <div className="mt-8 pt-6 border-t border-white/[0.08] bg-[#121214] -mx-6 sm:-mx-10 -mb-6 sm:-mb-10 p-6 sm:p-8 rounded-b-3xl space-y-4">
+          <div className="space-y-1.5">
+            <h3 className="text-base font-semibold text-white tracking-tight">
+              Get Fresher Hiring Alerts & Resume Blueprints
+            </h3>
+            <p className="text-xs text-neutral-400 leading-relaxed">
+              We break down real ATS resumes, salary negotiations, and fresher off-campus updates daily.
+            </p>
           </div>
-          <p className="text-xs text-slate-300">
-            We break down real ATS resumes, salary negotiations, and fresher off-campus updates daily in bite-sized Reels.
-          </p>
-          <a
-            href="https://instagram.com/snehal.fyi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold text-xs px-4 py-2 rounded-xl shadow"
-          >
-            <span>Follow @snehal.fyi</span>
-          </a>
+          <div className="flex flex-wrap items-center gap-2.5 pt-1">
+            <a
+              href="https://t.me/snehalfyi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-[#1c1c1f] hover:bg-[#252529] text-white border border-white/10 text-xs font-semibold px-4 py-2 rounded-full active:scale-95 transition"
+            >
+              <Send className="w-3.5 h-3.5 text-sky-400" />
+              <span>Telegram (@snehal.fyi)</span>
+            </a>
+            <a
+              href="https://instagram.com/snehal.fyi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-white text-black hover:bg-neutral-200 text-xs font-semibold px-4 py-2 rounded-full active:scale-95 transition"
+            >
+              <InstagramIcon className="w-3.5 h-3.5" />
+              <span>Follow @snehal.fyi</span>
+            </a>
+          </div>
         </div>
       </article>
     </div>
