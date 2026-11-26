@@ -213,7 +213,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
           <div className="flex flex-wrap items-center gap-2.5 pt-1">
             <a
-              href="https://t.me/snehalfyi"
+              href="https://t.me/snehal.fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#1c1c1f] hover:bg-[#252529] text-white border border-white/10 text-xs font-semibold px-4 py-2 rounded-full active:scale-95 transition"

@@ -15,7 +15,7 @@ export default function CommunityBanner() {
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <a
-            href="https://t.me/snehalfyi"
+            href="https://t.me/snehal.fyi"
             target="_blank"
             rel="noopener noreferrer"
             className="text-neutral-300 hover:text-white transition flex items-center gap-1.5 text-[11px] font-medium bg-white/[0.06] hover:bg-white/10 border border-white/[0.08] px-2.5 py-0.5 rounded-full"

@@ -146,7 +146,7 @@ export default function JobFeed({ initialJobs }: { initialJobs: Job[] }) {
               Reset Filters
             </button>
             <a
-              href="https://t.me/snehalfyi"
+              href="https://t.me/snehal.fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#1f1f23] text-neutral-200 border border-white/10 text-xs font-medium px-4 py-2 rounded-full hover:text-white transition active:scale-95"

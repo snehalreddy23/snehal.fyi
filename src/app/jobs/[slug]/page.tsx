@@ -216,7 +216,7 @@ export default async function JobDetailPage({ params }: PageProps) {
           </p>
         </div>
         <a
-          href="https://t.me/snehalfyi"
+          href="https://t.me/snehal.fyi"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 bg-[#1c1c1f] hover:bg-[#252529] text-white border border-white/10 px-5 py-2.5 rounded-full text-xs font-semibold flex-shrink-0 transition active:scale-95 shadow-sm"

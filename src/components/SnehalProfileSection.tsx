@@ -57,7 +57,7 @@ export default function SnehalProfileSection() {
                 <span>Follow @snehal.fyi</span>
               </a>
               <a
-                href="https://t.me/snehalfyi"
+                href="https://t.me/snehal.fyi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-neutral-900 hover:bg-neutral-800 text-neutral-200 border border-white/10 px-4 py-2 rounded-full text-xs font-medium active:scale-95 transition"

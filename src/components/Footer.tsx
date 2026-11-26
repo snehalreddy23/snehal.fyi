@@ -26,7 +26,7 @@ export default function Footer() {
               About
             </Link>
             <a
-              href="https://t.me/snehalfyi"
+              href="https://t.me/snehal.fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition flex items-center gap-1 text-neutral-300"

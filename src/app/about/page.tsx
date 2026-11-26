@@ -70,7 +70,7 @@ export default function AboutPage() {
                 <span>Follow @snehal.fyi</span>
               </a>
               <a
-                href="https://t.me/snehalfyi"
+                href="https://t.me/snehal.fyi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-neutral-900 text-neutral-300 border border-white/10 px-4 py-2 rounded-full text-xs font-medium hover:text-white transition"

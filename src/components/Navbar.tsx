@@ -52,7 +52,7 @@ export default function Navbar() {
           {/* Right Action: Telegram & Instagram */}
           <div className="hidden md:flex items-center gap-2.5">
             <a
-              href="https://t.me/snehalfyi"
+              href="https://t.me/snehal.fyi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-300 hover:text-white border border-white/10 px-3 py-1.5 rounded-full text-xs font-medium transition"
@@ -133,7 +133,7 @@ export default function Navbar() {
           </Link>
           <div className="pt-2 space-y-2">
             <a
-              href="https://t.me/snehalfyi"
+              href="https://t.me/snehal.fyi"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
