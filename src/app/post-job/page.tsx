@@ -139,7 +139,7 @@ ${formData.selectionProcess
         <div className="bg-[#070b16] border border-cyan-500/30 rounded-2xl p-5 space-y-4 text-xs font-mono">
           <div>
             <label className="text-slate-300 block mb-1">
-              Job ID (For Instagram Reel & ManyChat, e.g. 107):
+              Job ID (For Instagram Reel, e.g. 107):
             </label>
             <input
               type="text"

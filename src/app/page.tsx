@@ -45,7 +45,7 @@ export default function HomePage() {
           </span>
           <span className="flex items-center gap-1.5">
             <Zap className="w-4 h-4 text-white" />
-            Instant ManyChat DMs
+            Instant Instagram DMs
           </span>
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-white" />
@@ -68,20 +68,20 @@ export default function HomePage() {
         <JobFeed initialJobs={JOBS_DATA} />
       </section>
 
-      {/* ManyChat Instagram DM Feature Banner */}
+      {/* Instagram DM Feature Banner */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="apple-glass rounded-3xl p-6 sm:p-10 border border-white/[0.08] shadow-2xl">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-2.5 max-w-xl">
               <div className="inline-flex items-center gap-1.5 text-xs text-neutral-400 font-medium">
                 <InstagramIcon className="w-3.5 h-3.5" />
-                <span>Instagram DM Automation</span>
+                <span>Instagram Automated DMs</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Comment on any Reel → Link in your DM in 5s
               </h3>
               <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
-                When you see any hiring reel on <strong className="text-white font-medium">@snehal.fyi</strong>, comment the word <strong className="text-white font-medium">"APPLY"</strong> or the 3-digit Job ID (e.g. 101). Our bot delivers the direct application link to your Instagram inbox in seconds.
+                When you see any hiring reel on <strong className="text-white font-medium">@snehal.fyi</strong>, comment the word <strong className="text-white font-medium">"APPLY"</strong> or the 3-digit Job ID (e.g. 101). We automatically send the direct application link straight to your Instagram inbox in seconds.
               </p>
             </div>
 
@@ -183,7 +183,7 @@ export default function HomePage() {
             },
             {
               q: "How does the Instagram automation work?",
-              a: "When you comment 'APPLY' or the 3-digit Job ID on any Reel from @snehal.fyi, our ManyChat automation delivers the exact application URL straight to your Instagram DMs.",
+              a: "When you comment 'APPLY' or the 3-digit Job ID on any Reel from @snehal.fyi, our automated system delivers the exact application URL straight to your Instagram DMs in seconds.",
             },
           ].map((item, index) => (
             <div
