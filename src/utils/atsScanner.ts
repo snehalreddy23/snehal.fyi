@@ -20,6 +20,19 @@ export interface ATSReport {
   suggestedKeywords: string[];
 }
 
+export interface JobMatchReport {
+  matchScore: number;
+  verdict: string;
+  verdictColor: string;
+  matchedKeywords: string[];
+  missingKeywords: string[];
+  matchedQualifications: string[];
+  missingQualifications: string[];
+  recommendations: string[];
+  resumeWordCount: number;
+  jdWordCount: number;
+}
+
 const STRONG_VERBS = [
   "architected", "engineered", "developed", "built", "optimized", "designed",
   "implemented", "spearheaded", "refactored", "automated", "deployed",
@@ -56,6 +69,9 @@ const TECH_KEYWORDS: Record<string, string[]> = {
   ]
 };
 
+// ==========================================
+// 1. GENERAL ATS AUDIT ENGINE (7 PARAMETERS)
+// ==========================================
 export function analyzeResume(text: string, targetRole: string = "general"): ATSReport {
   const lowerText = text.toLowerCase();
   const words = text.trim().split(/\s+/).filter(Boolean);
@@ -64,11 +80,9 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
   const parameters: ParameterResult[] = [];
   const criticalFixes: string[] = [];
 
-  // ==========================================
-  // PARAMETER 1: Quantifiable Metrics & Impact (Max: 20)
-  // ==========================================
+  // Parameter 1: Quantifiable Metrics (20)
   const metricPatterns = [
-    /\b\d+%\b/g, // percentages (e.g. 40%, 15%)
+    /\b\d+%\b/g,
     /\b\d+\s*(?:ms|sec|seconds|minutes|hours|days|weeks|months|years)\b/gi,
     /(?:reduced|increased|improved|cut|saved|boosted|scaled)\s+(?:by\s+)?(?:\d+|[\$₹]\d+)/gi,
     /(?:[\$₹]\s*\d+|\d+\s*(?:lpa|k|m|million|thousand|users|requests|records|queries))/gi,
@@ -118,9 +132,7 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: metricImprovements
   });
 
-  // ==========================================
-  // PARAMETER 2: Action Verbs & Power Phrasing (Max: 15)
-  // ==========================================
+  // Parameter 2: Action Verbs (15)
   const foundStrongVerbs = STRONG_VERBS.filter((v) => new RegExp(`\\b${v}\\b`, "i").test(lowerText));
   const foundWeakVerbs = WEAK_VERBS.filter((v) => new RegExp(`\\b${v}\\b`, "i").test(lowerText));
 
@@ -157,9 +169,7 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: verbImprovements
   });
 
-  // ==========================================
-  // PARAMETER 3: Essential Section Architecture (Max: 15)
-  // ==========================================
+  // Parameter 3: Section Architecture (15)
   const sections = [
     { name: "Education", pat: /\b(education|academic|b\.?tech|degree|university|college)\b/i },
     { name: "Technical Skills", pat: /\b(technical skills|skills|technologies|proficiencies|tools)\b/i },
@@ -194,9 +204,7 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: sectionImprovements
   });
 
-  // ==========================================
-  // PARAMETER 4: Technical Keywords & Skill Density (Max: 15)
-  // ==========================================
+  // Parameter 4: Technical Keyword Density (15)
   const targetKeywords = TECH_KEYWORDS[targetRole] || TECH_KEYWORDS.general;
   const detectedSkills: string[] = [];
   const missingKeywords: string[] = [];
@@ -226,26 +234,22 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: missingKeywords.length > 0 ? [`Consider naturally incorporating missing keywords: ${missingKeywords.slice(0, 5).join(", ")}.`] : []
   });
 
-  // ==========================================
-  // PARAMETER 5: Formatting & ATS Parsing Red Flags (Max: 15)
-  // ==========================================
+  // Parameter 5: Formatting Red Flags (15)
   let formatScore = 15;
   const formatStrengths: string[] = [];
   const formatImprovements: string[] = [];
 
-  // Word count check
   if (wordCount >= 380 && wordCount <= 750) {
-    formatStrengths.push(`Ideal 1-page length (${wordCount} words). Fits perfectly within modern recruiter review thresholds.`);
+    formatStrengths.push(`Ideal 1-page length (${wordCount} words). Fits perfectly within recruiter review thresholds.`);
   } else if (wordCount > 850) {
     formatScore -= 5;
     formatImprovements.push(`Resume word count is high (${wordCount} words). Freshers must strictly maintain a 1-page resume.`);
     criticalFixes.push("Trim resume length down to under 700 words to ensure a strict 1-page layout.");
   } else if (wordCount < 250) {
     formatScore -= 7;
-    formatImprovements.push(`Resume word count is very low (${wordCount} words). Add detailed descriptions of technical projects and coursework.`);
+    formatImprovements.push(`Resume word count is low (${wordCount} words). Add detailed descriptions of technical projects.`);
   }
 
-  // Email & Phone checks
   const hasEmail = /[\w\.-]+@[\w\.-]+\.\w+/.test(text);
   const hasPhone = /(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}|\b\d{10}\b/.test(text);
 
@@ -256,11 +260,10 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     formatImprovements.push("Ensure your email and contact phone number are clearly displayed at the top header.");
   }
 
-  // Non-ASCII / Weird symbol check
   const weirdCharMatch = text.match(/[★☆✦■●◆▲▼►◄]/g);
   if (weirdCharMatch && weirdCharMatch.length > 5) {
     formatScore -= 3;
-    formatImprovements.push("Avoid Canva icon graphics or star rating bars (e.g. 'Java: ★★★★☆'). ATS parsers cannot read symbols.");
+    formatImprovements.push("Avoid Canva icon graphics or star rating bars. ATS parsers cannot read symbols.");
   }
 
   parameters.push({
@@ -273,9 +276,7 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: formatImprovements
   });
 
-  // ==========================================
-  // PARAMETER 6: Readability & Bullet Point Quality (Max: 10)
-  // ==========================================
+  // Parameter 6: Readability & Bullets (10)
   const bulletLines = text.split("\n").filter((l) => l.trim().startsWith("•") || l.trim().startsWith("-") || l.trim().startsWith("*"));
   let bulletScore = 7;
   const bulletStrengths: string[] = [];
@@ -298,9 +299,7 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: bulletImprovements
   });
 
-  // ==========================================
-  // PARAMETER 7: Proof of Work & Live Deployments (Max: 10)
-  // ==========================================
+  // Parameter 7: Proof of Work & Live Links (10)
   let proofScore = 2;
   const proofStrengths: string[] = [];
   const proofImprovements: string[] = [];
@@ -341,7 +340,6 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     improvements: proofImprovements
   });
 
-  // Calculate total composite score (Sum of all 7 parameters = 100 max)
   const totalScore = parameters.reduce((acc, p) => acc + p.score, 0);
 
   let grade = "Critical Flaws (High Rejection Risk)";
@@ -367,5 +365,141 @@ export function analyzeResume(text: string, targetRole: string = "general"): ATS
     criticalFixes: criticalFixes.slice(0, 3),
     detectedSkills: detectedSkills.slice(0, 10),
     suggestedKeywords: missingKeywords.slice(0, 6)
+  };
+}
+
+// ==========================================
+// 2. JOB-SPECIFIC ATS MATCHER ENGINE (JD vs RESUME)
+// ==========================================
+export function analyzeJobMatch(resumeText: string, jdText: string): JobMatchReport {
+  const lowerResume = resumeText.toLowerCase();
+  const lowerJD = jdText.toLowerCase();
+
+  const resumeWords = resumeText.trim().split(/\s+/).filter(Boolean);
+  const jdWords = jdText.trim().split(/\s+/).filter(Boolean);
+
+  // Common technical terms list for cross-matching
+  const INDUSTRY_TECH_TERMS = [
+    "python", "java", "c++", "c#", "javascript", "typescript", "golang", "rust",
+    "sql", "mysql", "postgresql", "mongodb", "snowflake", "bigquery", "redis",
+    "react", "next.js", "node.js", "express", "django", "fastapi", "spring boot",
+    "html", "css", "tailwind", "rest api", "graphql", "microservices",
+    "aws", "gcp", "azure", "docker", "kubernetes", "ci/cd", "git", "linux", "terraform",
+    "dsa", "data structures", "algorithms", "oop", "dbms", "operating systems",
+    "pandas", "numpy", "power bi", "tableau", "etl", "machine learning",
+    "unit testing", "agile", "scrum", "jira"
+  ];
+
+  // Common degree/qualification terms
+  const QUAL_TERMS = [
+    "b.tech", "b.e", "m.tech", "mca", "bca", "b.sc", "computer science",
+    "information technology", "2024", "2025", "2026", "2027", "cgpa", "percentage"
+  ];
+
+  // 1. Find keywords requested in the Job Description
+  const jdFoundTech = INDUSTRY_TECH_TERMS.filter((term) => {
+    const regex = new RegExp(`\\b${term.replace(/\+/g, "\\+")}\\b`, "i");
+    return regex.test(lowerJD);
+  });
+
+  const jdFoundQuals = QUAL_TERMS.filter((q) => {
+    const regex = new RegExp(`\\b${q.replace(/\./g, "\\.")}\\b`, "i");
+    return regex.test(lowerJD);
+  });
+
+  // 2. Cross-match against Resume
+  const matchedKeywords: string[] = [];
+  const missingKeywords: string[] = [];
+
+  jdFoundTech.forEach((term) => {
+    const regex = new RegExp(`\\b${term.replace(/\+/g, "\\+")}\\b`, "i");
+    if (regex.test(lowerResume)) {
+      matchedKeywords.push(term);
+    } else {
+      missingKeywords.push(term);
+    }
+  });
+
+  const matchedQualifications: string[] = [];
+  const missingQualifications: string[] = [];
+
+  jdFoundQuals.forEach((q) => {
+    const regex = new RegExp(`\\b${q.replace(/\./g, "\\.")}\\b`, "i");
+    if (regex.test(lowerResume)) {
+      matchedQualifications.push(q);
+    } else {
+      missingQualifications.push(q);
+    }
+  });
+
+  // Calculate Match Score
+  let score = 50; // base score
+
+  if (jdFoundTech.length > 0) {
+    const techRatio = matchedKeywords.length / jdFoundTech.length;
+    score = Math.round(techRatio * 75);
+  }
+
+  // Bonus for qualifications match
+  if (jdFoundQuals.length > 0) {
+    const qualRatio = matchedQualifications.length / jdFoundQuals.length;
+    score += Math.round(qualRatio * 25);
+  } else {
+    score = Math.min(100, Math.round(score * 1.3));
+  }
+
+  score = Math.min(100, Math.max(15, score));
+
+  // Determine Verdict
+  let verdict = "Low Match (High Risk of Rejection)";
+  let verdictColor = "text-rose-400";
+
+  if (score >= 80) {
+    verdict = "High Match — Strong Shortlist Candidate";
+    verdictColor = "text-emerald-400";
+  } else if (score >= 60) {
+    verdict = "Moderate Match — Add Missing Keywords";
+    verdictColor = "text-blue-400";
+  } else if (score >= 40) {
+    verdict = "Fair Match — Significant Gaps Detected";
+    verdictColor = "text-amber-400";
+  }
+
+  // Generate Tailored Recommendations
+  const recommendations: string[] = [];
+
+  if (missingKeywords.length > 0) {
+    recommendations.push(
+      `Add these exact technical keywords from the job description to your Skills or Projects section: ${missingKeywords.slice(0, 5).join(", ")}.`
+    );
+  }
+
+  if (missingQualifications.length > 0) {
+    recommendations.push(
+      `The job description mentions '${missingQualifications.slice(0, 3).join(", ")}'. Ensure your graduation batch and degree are clearly stated in your Education header.`
+    );
+  }
+
+  if (matchedKeywords.length >= 3) {
+    recommendations.push(
+      `You successfully matched ${matchedKeywords.length} core keywords (${matchedKeywords.slice(0, 4).join(", ")}). Make sure these are bolded in your project bullet points.`
+    );
+  }
+
+  recommendations.push(
+    "Mirror the exact phrases used in the JD. For instance, if the JD specifies 'RESTful APIs', write 'RESTful APIs' rather than just 'APIs'."
+  );
+
+  return {
+    matchScore: score,
+    verdict,
+    verdictColor,
+    matchedKeywords,
+    missingKeywords,
+    matchedQualifications,
+    missingQualifications,
+    recommendations,
+    resumeWordCount: resumeWords.length,
+    jdWordCount: jdWords.length
   };
 }
