@@ -7,10 +7,8 @@ import {
   Calendar,
   Clock,
   Sparkles,
-  ExternalLink,
   Send,
   ArrowRight,
-  ShieldCheck,
 } from "lucide-react";
 import InstagramIcon from "@/components/InstagramIcon";
 
@@ -110,15 +108,6 @@ export default async function BlogPostPage({ params }: Props) {
                 <span>Launch Free ATS Scanner</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <a
-                href="https://www.overleaf.com/latex/templates/jakes-resume/syzsqbzwjvdq"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-300 hover:text-white border border-white/10 text-xs font-medium px-4 py-2 rounded-full transition"
-              >
-                <span>Open Jake's LaTeX Template</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
             </div>
           </div>
         )}
@@ -150,31 +139,23 @@ export default async function BlogPostPage({ params }: Props) {
         {post.slug === "top-technical-questions-fresher-drives" && (
           <div className="p-5 rounded-2xl bg-blue-500/[0.05] border border-blue-500/20 space-y-3 mt-6">
             <div className="flex items-center gap-1.5 text-blue-400 font-semibold text-xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Verified Preparation Sheets</span>
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Ready for Technical Drives?</span>
             </div>
             <h4 className="text-sm font-semibold text-white">
-              Gold-Standard Problem Lists
+              Apply to Active Off-Campus Opportunities
             </h4>
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <a
-                href="https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/"
-                target="_blank"
-                rel="noopener noreferrer"
+            <p className="text-xs text-neutral-300 leading-relaxed">
+              Companies are actively hiring for 2025, 2026, and 2027 batches. View verified career links with Snehal's insider prep tips.
+            </p>
+            <div className="pt-1">
+              <Link
+                href="/"
                 className="inline-flex items-center gap-1.5 bg-white text-black hover:bg-neutral-200 text-xs font-semibold px-4 py-2 rounded-full transition shadow"
               >
-                <span>Striver's SDE Sheet (191 Questions)</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href="https://neetcode.io/roadmap"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-300 hover:text-white border border-white/10 text-xs font-medium px-4 py-2 rounded-full transition"
-              >
-                <span>NeetCode 150 Roadmap</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
+                <span>Browse Active Openings</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </div>
         )}
