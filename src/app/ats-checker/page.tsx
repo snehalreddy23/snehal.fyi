@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -29,6 +29,7 @@ import {
 
 function ATSCheckerContent() {
   const searchParams = useSearchParams();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Mode: "general" vs "job-specific"
   const [scannerMode, setScannerMode] = useState<"general" | "job-specific">("general");
@@ -207,6 +208,9 @@ Responsibilities:
     setMatchReport(null);
     setCopiedPrompt(false);
     setCopiedReport(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const copyChatGptPrompt = () => {
@@ -501,6 +505,7 @@ INSTRUCTIONS:
                 <label className="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition shadow">
                   <span>Browse PDF</span>
                   <input
+                    ref={fileInputRef}
                     type="file"
                     accept=".pdf,.txt"
                     onChange={handleFileUpload}
@@ -775,6 +780,20 @@ INSTRUCTIONS:
               </div>
             </div>
           </div>
+
+          {/* Bottom Clear & Scan Another Button */}
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={() => {
+                clearAll();
+                window.scrollTo({ top: 220, behavior: "smooth" });
+              }}
+              className="inline-flex items-center justify-center gap-2 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-semibold text-xs px-6 py-3 rounded-full transition active:scale-95 shadow"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+              <span>Clear Resume & Scan Another</span>
+            </button>
+          </div>
         </div>
       )}
 
@@ -1035,6 +1054,20 @@ INSTRUCTIONS:
                 </a>
               </div>
             </div>
+          </div>
+
+          {/* Bottom Clear & Scan Another Button */}
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={() => {
+                clearAll();
+                window.scrollTo({ top: 220, behavior: "smooth" });
+              }}
+              className="inline-flex items-center justify-center gap-2 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-semibold text-xs px-6 py-3 rounded-full transition active:scale-95 shadow"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+              <span>Clear Resume & Scan Another</span>
+            </button>
           </div>
         </div>
       )}
