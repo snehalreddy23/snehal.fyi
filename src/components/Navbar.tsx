@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Briefcase, FileText, Menu, X, ArrowUpRight } from "lucide-react";
+import { Briefcase, FileText, Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 import InstagramIcon from "./InstagramIcon";
 
 export default function Navbar() {
@@ -26,6 +26,14 @@ export default function Navbar() {
               className="text-neutral-200 hover:text-white transition"
             >
               Jobs
+            </Link>
+            <Link
+              href="/ats-checker"
+              className="text-white hover:text-blue-400 transition flex items-center gap-1 font-semibold"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+              <span>ATS Checker</span>
+              <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Free</span>
             </Link>
             <Link
               href="/blog"
@@ -85,6 +93,17 @@ export default function Navbar() {
             className="flex items-center justify-between py-2.5 text-sm font-medium text-white border-b border-white/[0.05]"
           >
             <span>All Openings</span>
+            <ArrowUpRight className="w-4 h-4 text-neutral-500" />
+          </Link>
+          <Link
+            href="/ats-checker"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center justify-between py-2.5 text-sm font-medium text-blue-400 border-b border-white/[0.05]"
+          >
+            <div className="flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-blue-400" />
+              <span>Free ATS Resume Checker</span>
+            </div>
             <ArrowUpRight className="w-4 h-4 text-neutral-500" />
           </Link>
           <Link

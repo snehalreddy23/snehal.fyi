@@ -11,6 +11,7 @@ import {
   Zap,
   CheckCircle2,
   FileText,
+  Sparkles,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -39,6 +40,13 @@ export default function HomePage() {
 
         {/* Feature Highlights */}
         <div className="pt-2 flex flex-wrap items-center justify-center gap-5 text-xs text-neutral-400">
+          <Link
+            href="/ats-checker"
+            className="inline-flex items-center gap-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3.5 py-1.5 rounded-full font-semibold transition"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Free ATS Resume Checker →</span>
+          </Link>
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-white" />
             100% Free Direct Apply
