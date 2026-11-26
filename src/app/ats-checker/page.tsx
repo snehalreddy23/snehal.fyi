@@ -216,48 +216,118 @@ Responsibilities:
   const copyChatGptPrompt = () => {
     let prompt = "";
     if (scannerMode === "job-specific" && matchReport) {
-      prompt = `I am a fresher applying for this job. I ran my resume through the snehal.fyi ATS scanner and got a match score of ${matchReport.matchScore}/100 (${matchReport.verdict}).
+      prompt = `═══════════════════════════════════════════════════════════════
+🤖 SNEHAL.FYI ATS OPTIMIZER & RE-ENGINEERING DIRECTIVE
+═══════════════════════════════════════════════════════════════
+ACT AS:
+A Principal Technical Recruiter & Senior Hiring Bar Raiser at a FAANG / Tier-1 Tech Company who has screened 25,000+ software engineering resumes. You have a zero-tolerance policy for generic buzzwords, unquantified claims, and ATS formatting flaws.
 
-TARGET JOB DESCRIPTION:
-${jobDescription.slice(0, 1500)}
+MISSION:
+Transform the attached fresher resume into an elite, ATS 95+ score single-column document engineered to pass Workday, Greenhouse, and Taleo, and guarantee an interview callback for this exact opening.
 
-ATS SCAN FINDINGS:
-- Matched Skills: ${matchReport.matchedKeywords.join(", ") || "None"}
-- CRITICAL MISSING SKILLS TO WEAVE IN: ${matchReport.missingKeywords.join(", ") || "None"}
-- Specific ATS Recommendations:
-${matchReport.recommendations.map((r) => `  * ${r}`).join("\n")}
+═══════════════════════════════════════════════════════════════
+📊 REAL-TIME ATS AUDIT DIAGNOSTICS (FROM SNEHAL.FYI):
+═══════════════════════════════════════════════════════════════
+• Current Match Score: ${matchReport.matchScore}% (${matchReport.verdict})
+• Matched Technical Keywords: ${matchReport.matchedKeywords.join(", ") || "None"}
+• 🚨 CRITICAL MISSING KEYWORDS (Must naturally incorporate):
+  ${matchReport.missingKeywords.join(", ") || "None"}
+• Audit Recommendations:
+${matchReport.recommendations.map((r) => `  - ${r}`).join("\n")}
 
-MY CURRENT RESUME:
-${resumeText.slice(0, 2000)}
+═══════════════════════════════════════════════════════════════
+🎯 TARGET JOB DESCRIPTION:
+═══════════════════════════════════════════════════════════════
+${jobDescription.trim()}
 
-INSTRUCTIONS:
-1. Rewrite my project bullet points using Google's X-Y-Z formula: "Accomplished [X] as measured by [Y], by doing [Z]" with measurable percentages and performance gains.
-2. Naturally weave in the missing skills without lying.
-3. Keep the format strictly single-column, 1 page, and ATS parseable.`;
+═══════════════════════════════════════════════════════════════
+📄 CANDIDATE CURRENT RESUME:
+═══════════════════════════════════════════════════════════════
+${resumeText.trim()}
+
+═══════════════════════════════════════════════════════════════
+⚡ STRICT RE-ENGINEERING RULES (FOLLOW TO THE LETTER):
+═══════════════════════════════════════════════════════════════
+1. ZERO HALLUCINATION & REALISTIC CLAIMS:
+   - Do NOT invent companies, college degrees, or fabricated tools the candidate didn't use.
+   - Weave the MISSING KEYWORDS (${matchReport.missingKeywords.slice(0, 8).join(", ")}) into relevant projects where technically plausible (e.g., adding Docker containerization, REST API optimization, unit testing, SQL indexing).
+
+2. BANNED AI BUZZWORDS (STRICT BLACKLIST):
+   - Never use: "Spearheaded", "Leveraged", "Utilized", "Passionate", "Dynamic", "Synergistic", "Hardworking", "Fast-paced", "Helped", "Assisted".
+   - Replace with hard engineering action verbs: "Architected", "Engineered", "Benchmarked", "Refactored", "Containerized", "Automated", "Deployed", "Reduced", "Optimized".
+
+3. GOOGLE'S STRICT X-Y-Z FORMULA FOR EVERY BULLET:
+   - Format: "Accomplished [X] as measured by [Y], by doing [Z]"
+   - Every single project bullet MUST have a realistic, defendable fresher metric:
+     * Latency reduction (e.g., "cut API response time by 42% from 380ms to 220ms")
+     * Throughput / scale (e.g., "handling 5,000+ simulated concurrent requests")
+     * Efficiency (e.g., "reduced cloud compute cost by 32% through payload compression")
+     * Database performance (e.g., "indexed 4 SQL tables reducing full-table scan times by 65%")
+
+4. SINGLE-PAGE ATS LAYOUT COMPLIANCE:
+   - Output must be 100% single-column, standard plain text.
+   - Max 3-4 high-impact bullets per project.
+   - Max 1 page when pasted into standard Word/Docs (10pt font, 0.5" margins).
+
+═══════════════════════════════════════════════════════════════
+🚀 REQUIRED OUTPUT FORMAT (DO NOT DEVIATE):
+═══════════════════════════════════════════════════════════════
+Output in 3 clearly separated sections:
+
+SECTION 1: THE 3 BIGGEST RED FLAGS FIXED
+(Brief 3-bullet diagnosis explaining what was hurting this resume's ATS score).
+
+SECTION 2: COMPLETE READY-TO-PASTE ATS RESUME
+(Provide the full, beautifully formatted plain-text resume from Contact Header to Technical Skills, Projects, Experience, and Education, with all missing keywords seamlessly embedded).
+
+SECTION 3: INTERVIEW DEFENSE TALKING POINTS
+(For the 3 biggest metrics you introduced, give the candidate a 2-sentence script explaining exactly how to defend the number in a live technical interview if asked "How did you measure this 35% improvement?").`;
     } else if (generalReport) {
-      prompt = `I am a fresher engineering graduate. I audited my resume on snehal.fyi and received an ATS score of ${generalReport.overallScore}/100 (${generalReport.grade}).
+      prompt = `═══════════════════════════════════════════════════════════════
+🤖 SNEHAL.FYI GENERAL ATS RESUME ELEVATION DIRECTIVE
+═══════════════════════════════════════════════════════════════
+ACT AS:
+A Principal Technical Recruiter & Senior Hiring Bar Raiser at a Tier-1 Tech Company.
 
-ATS AUDIT FINDINGS:
-- Critical Priority Fixes:
-${generalReport.criticalFixes.map((f: string) => `  * ${f}`).join("\n")}
-- Parameters Evaluated:
-${generalReport.parameters.map((p) => `  * ${p.name}: ${p.score}/${p.maxScore} (${p.status}) - ${p.summary}`).join("\n")}
-- Detected Technical Skills: ${generalReport.detectedSkills.join(", ")}
-- Missing/Suggested Keywords: ${generalReport.suggestedKeywords.join(", ")}
+MISSION:
+Audit and completely re-engineer this fresher resume into an elite, ATS 95+ score single-column document optimized for ${targetRole.toUpperCase()} campus and off-campus placement drives.
 
-MY CURRENT RESUME TEXT:
-${resumeText.slice(0, 2000)}
+═══════════════════════════════════════════════════════════════
+📊 SNEHAL.FYI ATS DIAGNOSTICS:
+═══════════════════════════════════════════════════════════════
+• Current Score: ${generalReport.overallScore}/100 (${generalReport.grade})
+• Critical Priority Red Flags:
+${generalReport.criticalFixes.map((f: string) => `  - ${f}`).join("\n")}
+• Detailed 7-Parameter Evaluation:
+${generalReport.parameters.map((p) => `  - ${p.name}: ${p.score}/${p.maxScore} (${p.status}) → ${p.summary}`).join("\n")}
+• Detected Skills: ${generalReport.detectedSkills.join(", ") || "None"}
+• High-Priority Missing Skills for ${targetRole.toUpperCase()}: ${generalReport.suggestedKeywords.join(", ") || "None"}
 
-INSTRUCTIONS:
-1. Rewrite my project and experience bullet points using the Google X-Y-Z formula ("Accomplished [X] as measured by [Y], by doing [Z]").
-2. Ensure every bullet starts with a strong action verb and includes measurable metrics.
-3. Naturally incorporate the suggested keywords and ensure the layout remains strictly 1-page and single-column ATS friendly.`;
+═══════════════════════════════════════════════════════════════
+📄 CANDIDATE CURRENT RESUME:
+═══════════════════════════════════════════════════════════════
+${resumeText.trim()}
+
+═══════════════════════════════════════════════════════════════
+⚡ STRICT RE-ENGINEERING RULES:
+═══════════════════════════════════════════════════════════════
+1. ZERO HALLUCINATION: Maintain true technical integrity without fabricating false company roles.
+2. BANNED AI BUZZWORDS: Zero tolerance for "Spearheaded", "Leveraged", "Utilized", "Passionate", "Dynamic", "Synergistic".
+3. GOOGLE X-Y-Z FORMULA: "Accomplished [X] as measured by [Y], by doing [Z]" with measurable performance metrics, latency drops, database optimizations, or scale.
+4. STRICT 1-PAGE SINGLE COLUMN: Top-to-bottom hierarchy (Header → Education → Skills → Projects → Experience → Certifications).
+
+═══════════════════════════════════════════════════════════════
+🚀 REQUIRED OUTPUT FORMAT:
+═══════════════════════════════════════════════════════════════
+SECTION 1: THE 3 BIGGEST RED FLAGS ELIMINATED
+SECTION 2: COMPLETE READY-TO-PASTE RE-ENGINEERED RESUME
+SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a live interview).`;
     }
 
     if (prompt) {
       navigator.clipboard.writeText(prompt);
       setCopiedPrompt(true);
-      setTimeout(() => setCopiedPrompt(false), 3000);
+      setTimeout(() => setCopiedPrompt(false), 5000);
     }
   };
 
@@ -613,43 +683,68 @@ INSTRUCTIONS:
               </div>
 
               {/* Action Buttons: AI Prompt + Report Copy + Clear + Share */}
-              <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
-                <button
-                  onClick={copyChatGptPrompt}
-                  className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-full transition shadow-sm active:scale-95"
-                  title="Copies an engineered prompt with your results for ChatGPT/Claude"
-                >
-                  {copiedPrompt ? <Check className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5" />}
-                  <span>{copiedPrompt ? "Prompt Copied for AI!" : "Copy ChatGPT Prompt"}</span>
-                </button>
+              <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
+                <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
+                  <button
+                    onClick={copyChatGptPrompt}
+                    className="inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs px-4 py-2.5 rounded-full transition shadow-md active:scale-95"
+                    title="Copies a Bar-Raiser engineered prompt with rules & defense scripts for ChatGPT/Claude"
+                  >
+                    {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-300" /> : <Sparkles className="w-3.5 h-3.5 text-blue-200" />}
+                    <span>{copiedPrompt ? "God-Mode Prompt Copied!" : "Copy God-Mode ChatGPT Prompt"}</span>
+                  </button>
 
-                <button
-                  onClick={copyReportSummary}
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-200 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
-                >
-                  {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedReport ? "Copied!" : "Copy Report"}</span>
-                </button>
+                  <button
+                    onClick={copyReportSummary}
+                    className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-200 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                  >
+                    {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedReport ? "Copied!" : "Copy Report"}</span>
+                  </button>
 
-                <button
-                  onClick={() => {
-                    clearAll();
-                    window.scrollTo({ top: 220, behavior: "smooth" });
-                  }}
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
-                  title="Clear resume and start fresh"
-                >
-                  <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Clear</span>
-                </button>
+                  <button
+                    onClick={() => {
+                      clearAll();
+                      window.scrollTo({ top: 220, behavior: "smooth" });
+                    }}
+                    className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                    title="Clear resume and start fresh"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Clear</span>
+                  </button>
 
-                <button
-                  onClick={shareScore}
-                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
-                >
-                  <Share2 className="w-3.5 h-3.5" />
-                  <span>Share</span>
-                </button>
+                  <button
+                    onClick={shareScore}
+                    className="inline-flex items-center justify-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>Share</span>
+                  </button>
+                </div>
+
+                {copiedPrompt && (
+                  <div className="flex items-center gap-2 text-[11px] text-neutral-300 animate-in fade-in duration-200 bg-white/[0.04] border border-white/[0.08] px-3 py-1 rounded-full">
+                    <span className="text-neutral-400">Ready to paste into:</span>
+                    <a
+                      href="https://chatgpt.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:underline font-medium"
+                    >
+                      ChatGPT ↗
+                    </a>
+                    <span className="text-neutral-600">•</span>
+                    <a
+                      href="https://claude.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-400 hover:underline font-medium"
+                    >
+                      Claude ↗
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -879,43 +974,68 @@ INSTRUCTIONS:
               </div>
 
               {/* Action Buttons: AI Prompt + Report Copy + Clear + Share */}
-              <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
-                <button
-                  onClick={copyChatGptPrompt}
-                  className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs px-4 py-2.5 rounded-full transition shadow-sm active:scale-95"
-                  title="Copies an engineered prompt with your results for ChatGPT/Claude"
-                >
-                  {copiedPrompt ? <Check className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5" />}
-                  <span>{copiedPrompt ? "Prompt Copied for AI!" : "Copy ChatGPT Prompt"}</span>
-                </button>
+              <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
+                <div className="flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto justify-center sm:justify-end">
+                  <button
+                    onClick={copyChatGptPrompt}
+                    className="inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs px-4 py-2.5 rounded-full transition shadow-md active:scale-95"
+                    title="Copies a Bar-Raiser engineered prompt with rules & defense scripts for ChatGPT/Claude"
+                  >
+                    {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-300" /> : <Sparkles className="w-3.5 h-3.5 text-blue-200" />}
+                    <span>{copiedPrompt ? "God-Mode Prompt Copied!" : "Copy God-Mode ChatGPT Prompt"}</span>
+                  </button>
 
-                <button
-                  onClick={copyReportSummary}
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-200 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
-                >
-                  {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedReport ? "Copied!" : "Copy Report"}</span>
-                </button>
+                  <button
+                    onClick={copyReportSummary}
+                    className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-[#1f1f23] text-neutral-200 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                  >
+                    {copiedReport ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedReport ? "Copied!" : "Copy Report"}</span>
+                  </button>
 
-                <button
-                  onClick={() => {
-                    clearAll();
-                    window.scrollTo({ top: 220, behavior: "smooth" });
-                  }}
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
-                  title="Clear resume and start fresh"
-                >
-                  <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Clear</span>
-                </button>
+                  <button
+                    onClick={() => {
+                      clearAll();
+                      window.scrollTo({ top: 220, behavior: "smooth" });
+                    }}
+                    className="inline-flex items-center justify-center gap-1.5 bg-[#161618] hover:bg-rose-500/10 hover:border-rose-500/30 text-neutral-300 hover:text-rose-300 border border-white/10 font-medium text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                    title="Clear resume and start fresh"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Clear</span>
+                  </button>
 
-                <button
-                  onClick={shareScore}
-                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
-                >
-                  <Share2 className="w-3.5 h-3.5" />
-                  <span>Share</span>
-                </button>
+                  <button
+                    onClick={shareScore}
+                    className="inline-flex items-center justify-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold text-xs px-3.5 py-2.5 rounded-full transition active:scale-95"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>Share</span>
+                  </button>
+                </div>
+
+                {copiedPrompt && (
+                  <div className="flex items-center gap-2 text-[11px] text-neutral-300 animate-in fade-in duration-200 bg-white/[0.04] border border-white/[0.08] px-3 py-1 rounded-full">
+                    <span className="text-neutral-400">Ready to paste into:</span>
+                    <a
+                      href="https://chatgpt.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:underline font-medium"
+                    >
+                      ChatGPT ↗
+                    </a>
+                    <span className="text-neutral-600">•</span>
+                    <a
+                      href="https://claude.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-400 hover:underline font-medium"
+                    >
+                      Claude ↗
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
 
