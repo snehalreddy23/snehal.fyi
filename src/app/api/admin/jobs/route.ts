@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyAdminPasscode, fetchJobsList, saveJobsList, getGitHubConfig } from "@/utils/githubJobs";
+import { sendTelegramBroadcast, getTelegramConfig } from "@/utils/telegramBot";
 import { Job } from "@/types";
 
 function extractPasscode(request: Request): string | null {
@@ -14,6 +15,7 @@ export async function GET(request: Request) {
 
   const { jobs, source, sha, error } = await fetchJobsList();
   const config = getGitHubConfig();
+  const telegramConfig = getTelegramConfig();
 
   return NextResponse.json({
     jobs,
@@ -21,6 +23,8 @@ export async function GET(request: Request) {
     sha,
     error,
     githubConfigured: config.isConfigured,
+    telegramConfigured: telegramConfig.isConfigured,
+    telegramChannel: telegramConfig.channelId,
     repo: `${config.owner}/${config.repo}`,
     branch: config.branch,
   });
@@ -165,14 +169,26 @@ export async function POST(request: Request) {
       );
     }
 
+    let telegramStatus: { success: boolean; error?: string } | null = null;
+    if (body.autoBroadcastTelegram) {
+      telegramStatus = await sendTelegramBroadcast(newJob);
+    }
+
     return NextResponse.json({
       success: true,
       job: newJob,
       method: saveResult.method,
       commitSha: saveResult.commitSha,
+      telegramBroadcast: telegramStatus,
       message:
         saveResult.method === "github"
-          ? "Job committed to GitHub! Vercel will rebuild and deploy in ~30 seconds."
+          ? `Job committed to GitHub!${
+              telegramStatus?.success
+                ? " Also broadcasted to Telegram!"
+                : telegramStatus?.error
+                ? ` (Telegram error: ${telegramStatus.error})`
+                : ""
+            }`
           : "Job saved to local database file.",
     });
   } catch (err: unknown) {

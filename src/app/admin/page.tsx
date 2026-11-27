@@ -21,6 +21,7 @@ import {
   ArrowRight,
   TrendingUp,
   Eye,
+  Send,
 } from "lucide-react";
 import { Job } from "@/types";
 
@@ -34,6 +35,8 @@ export default function AdminPage() {
   const [loadingJobs, setLoadingJobs] = useState(false);
   const [syncInfo, setSyncInfo] = useState<{
     githubConfigured: boolean;
+    telegramConfigured?: boolean;
+    telegramChannel?: string;
     repo: string;
     branch: string;
     source: string;
@@ -58,8 +61,10 @@ export default function AdminPage() {
   ]);
   const [snehalTips, setSnehalTips] = useState("");
   const [featured, setFeatured] = useState(false);
+  const [autoBroadcastTelegram, setAutoBroadcastTelegram] = useState(true);
 
   const [actionLoading, setActionLoading] = useState(false);
+  const [broadcastingId, setBroadcastingId] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
 
@@ -110,6 +115,8 @@ export default function AdminPage() {
         setJobs(data.jobs || []);
         setSyncInfo({
           githubConfigured: data.githubConfigured,
+          telegramConfigured: data.telegramConfigured,
+          telegramChannel: data.telegramChannel,
           repo: data.repo,
           branch: data.branch,
           source: data.source,
@@ -170,6 +177,7 @@ export default function AdminPage() {
             snehalTips ||
             `Tailor your resume specifically for ${role} at ${company}. Keep it strictly to 1 page with live project links.`,
           featured,
+          autoBroadcastTelegram,
         }),
       });
 
@@ -225,6 +233,45 @@ export default function AdminPage() {
       setActionError("Network error deleting job.");
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const handleBroadcastTelegram = async (
+    id: string,
+    roleName: string,
+    companyName: string
+  ) => {
+    const confirmed = window.confirm(
+      `Broadcast "${roleName} at ${companyName}" directly to Telegram channel @snehal_fyi?`
+    );
+    if (!confirmed) return;
+
+    setBroadcastingId(id);
+    setActionSuccess(null);
+    setActionError(null);
+
+    try {
+      const res = await fetch("/api/admin/telegram/broadcast", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-passcode": passcode,
+        },
+        body: JSON.stringify({ jobId: id }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setActionSuccess(
+          data.message || `Broadcasted ${roleName} to Telegram successfully!`
+        );
+      } else {
+        setActionError(data.error || "Failed to broadcast to Telegram");
+      }
+    } catch {
+      setActionError("Network error broadcasting to Telegram");
+    } finally {
+      setBroadcastingId(null);
     }
   };
 
@@ -688,6 +735,23 @@ export default function AdminPage() {
                 </label>
               </div>
 
+              <div className="flex items-center gap-2 pt-0.5">
+                <input
+                  type="checkbox"
+                  id="autoTelegram"
+                  checked={autoBroadcastTelegram}
+                  onChange={(e) => setAutoBroadcastTelegram(e.target.checked)}
+                  className="rounded border-white/20 bg-black/40 text-sky-500 focus:ring-sky-500"
+                />
+                <label
+                  htmlFor="autoTelegram"
+                  className="text-xs text-slate-300 select-none cursor-pointer flex items-center gap-1.5"
+                >
+                  <Send className="w-3.5 h-3.5 text-sky-400" />
+                  Auto-broadcast to Telegram (@snehal_fyi)
+                </label>
+              </div>
+
               <button
                 type="submit"
                 disabled={actionLoading}
@@ -788,6 +852,24 @@ export default function AdminPage() {
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                      <button
+                        onClick={() =>
+                          handleBroadcastTelegram(job.id, job.role, job.company)
+                        }
+                        disabled={
+                          actionLoading || broadcastingId === job.id
+                        }
+                        className="px-2.5 py-2 text-sky-400 hover:text-sky-300 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/20 rounded-xl transition flex items-center gap-1.5 text-xs font-medium disabled:opacity-50"
+                        title="Broadcast directly to @snehal_fyi on Telegram"
+                      >
+                        <Send
+                          className={`w-3.5 h-3.5 ${
+                            broadcastingId === job.id ? "animate-spin" : ""
+                          }`}
+                        />
+                        <span className="hidden sm:inline">Broadcast</span>
+                      </button>
+
                       <Link
                         href={`/jobs/${job.slug}`}
                         target="_blank"
@@ -862,6 +944,72 @@ export default function AdminPage() {
                   Hit <strong>Redeploy</strong>. Now whenever you add or delete a
                   job here, it will commit straight into your repository and
                   Vercel will auto-deploy the change in ~30 seconds!
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        {/* Setup Guide for Telegram Bot Auto-Posting */}
+        <div className="bg-[#161618] border border-white/10 rounded-3xl p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0">
+              <Send className="w-5 h-5" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-white">
+                  How to enable 1-Click Telegram Broadcasts to @snehal_fyi:
+                </h3>
+                {syncInfo?.telegramConfigured ? (
+                  <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    Active & Connected
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-semibold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                    Setup Needed
+                  </span>
+                )}
+              </div>
+              <ol className="text-xs text-slate-400 space-y-1.5 list-decimal pl-4 leading-relaxed">
+                <li>
+                  Open Telegram and search for <strong>@BotFather</strong>.
+                </li>
+                <li>
+                  Send <code className="text-white">/newbot</code>, give it a
+                  name (e.g. <em>Snehal Jobs Bot</em>), and pick a username ending
+                  in <em>_bot</em>.
+                </li>
+                <li>
+                  BotFather will reply with an HTTP API token (e.g.{" "}
+                  <code className="text-white">718293847:AAHk...</code>).
+                </li>
+                <li>
+                  Open your Telegram Channel (<strong>@snehal_fyi</strong>) →{" "}
+                  <strong>Channel Settings</strong> → <strong>Administrators</strong> →{" "}
+                  <strong>Add Administrator</strong> → search for your newly created
+                  bot and add it with <em>&quot;Post Messages&quot;</em> permission.
+                </li>
+                <li>
+                  Add the token to your{" "}
+                  <a
+                    href="https://vercel.com/snehalchirra-2957/snehal-fyi/settings/environment-variables"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-400 underline hover:text-indigo-300"
+                  >
+                    Vercel Environment Variables
+                  </a>
+                  :
+                  <div className="mt-1 font-mono text-[11px] text-slate-300 bg-black/60 p-2 rounded-lg border border-white/5 space-y-0.5">
+                    <div>TELEGRAM_BOT_TOKEN=your_token_from_botfather</div>
+                    <div>TELEGRAM_CHANNEL_ID=@snehal_fyi</div>
+                  </div>
+                </li>
+                <li>
+                  Redeploy on Vercel. Now whenever you publish a job, it
+                  automatically broadcasts straight to your 10,000+ members on
+                  Telegram!
                 </li>
               </ol>
             </div>
