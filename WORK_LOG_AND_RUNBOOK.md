@@ -61,18 +61,14 @@
   - Traffic referrers (Telegram channel vs Instagram vs Google vs Direct)
 
 ### C. Standardized Telegram & Social Links
-- Updated **all 10 Telegram touchpoints** across the entire project to point strictly to `https://t.me/snehal_fyi` with visible handle `@snehal_fyi`:
-  1. `src/components/CommunityBanner.tsx`
-  2. `src/components/Navbar.tsx` (Desktop badge)
-  3. `src/components/Navbar.tsx` (Mobile dropdown)
-  4. `src/app/page.tsx` (Social action buttons)
-  5. `src/components/JobFeed.tsx` (Filter reset prompt)
-  6. `src/app/jobs/[slug]/page.tsx` (Job detail alert banner & join button)
-  7. `src/components/JobShareButtons.tsx` (Pre-filled Telegram share text)
-  8. `src/app/blog/[slug]/page.tsx` (Article bottom CTA)
-  9. `src/app/about/page.tsx` (Profile social link)
-  10. `src/components/Footer.tsx` (Site footer)
+- Updated **all 10 Telegram touchpoints** across the entire project to point strictly to `https://t.me/snehal_fyi` with visible handle `@snehal_fyi`.
 - Preserved Instagram link strictly as `https://instagram.com/snehal.fyi` (`@snehal.fyi`).
+
+### D. Automated Telegram Bot Channel Broadcasting
+- Built `src/utils/telegramBot.ts` to automatically format and broadcast jobs directly to `@snehal_fyi` using the Telegram Bot API (`sendMessage` with HTML formatting).
+- Added `POST /api/admin/telegram/broadcast` allowing 1-click broadcasts for any active job.
+- Integrated an **Auto-Broadcast checkbox** into the `/admin` job publishing flow.
+- Added a 1-click **"Broadcast"** button to every job card in `/admin`.
 
 ### D. Resume ATS Checker (`/ats-checker`)
 - **Clear & Reset Resume:** Added multi-location clear buttons (at top action bar, next to file input, and bottom of results) with `fileInputRef` state reset so users can test multiple resumes in one session.
