@@ -53,7 +53,7 @@ export const DETAILED_BLOG_POSTS: DetailedBlogPost[] = [
       {
         heading: "The 6 Essential Sections in Sequential Order",
         paragraphs: [
-          "To guarantee 100% text parsing accuracy across all enterprise ATS platforms, arrange your resume in this strict top-to-bottom hierarchy:"
+          "To achieve maximum text parsing accuracy across enterprise ATS platforms, arrange your resume in this clean top-to-bottom hierarchy:"
         ],
         bullets: [
           "1. Header: Full Name, Professional Email, Phone Number, City, LinkedIn URL, GitHub URL, and Portfolio Link.",

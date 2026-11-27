@@ -195,7 +195,7 @@ export default function EnterpriseAIGradingView({
             <div className="mt-4 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between flex-wrap gap-2 text-[11px] text-neutral-400">
               <span className="flex items-center gap-1.5 text-neutral-300">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span><strong>Privacy Guaranteed:</strong> Candidate names, emails, phones & handles are stripped before AI evaluation.</span>
+                <span><strong>Privacy Protected:</strong> Candidate names, emails, phones & handles are stripped before AI evaluation.</span>
               </span>
               <span className="text-[10px] text-neutral-500">
                 DPDP Act 2023 & GDPR Compliant • Zero Data Retention

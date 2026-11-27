@@ -34,7 +34,7 @@ interface RateLimitRecord {
   resetAt: number;
 }
 const ipRateLimit = new Map<string, RateLimitRecord>();
-const MAX_AI_SCANS_PER_HOUR = 3;
+const MAX_AI_SCANS_PER_HOUR = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 function checkIpRateLimit(ip: string): { allowed: boolean; minutesUntilReset: number } {

@@ -281,7 +281,7 @@ ACT AS:
 A Principal Technical Recruiter & Senior Hiring Bar Raiser at a FAANG / Tier-1 Tech Company who has screened 25,000+ software engineering resumes. You have a zero-tolerance policy for generic buzzwords, unquantified claims, and ATS formatting flaws.
 
 MISSION:
-Transform the attached fresher resume into an elite, ATS 95+ score single-column document engineered to pass Workday, Greenhouse, and Taleo, and guarantee an interview callback for this exact opening.
+Transform the attached fresher resume into an ATS-optimized single-column document engineered to align with Workday, Greenhouse, and Taleo standards and maximize interview callback chances for this exact opening.
 
 ═══════════════════════════════════════════════════════════════
 📊 REAL-TIME ATS AUDIT DIAGNOSTICS (FROM SNEHAL.FYI):
@@ -627,7 +627,7 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
                   {fileName ? fileName : "Upload your resume PDF"}
                 </p>
                 <p className="text-xs text-neutral-400 mt-1">
-                  100% private. Files never leave your browser or touch any server.
+                  Private & secure. Text is processed in-memory with personal contact details stripped.
                 </p>
               </div>
               <div>
@@ -649,7 +649,7 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
         {/* Scan Action Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-white/[0.06]">
           <p className="text-neutral-500 text-[11px] text-center sm:text-left">
-            Privacy Guaranteed: Scanned instantly via in-browser regex parsing.
+            Privacy-First Design: In-memory evaluation with automated personal data protection.
           </p>
 
           <button
@@ -924,10 +924,10 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
                   Want Us to Personally Tailor Your Resume for This Role?
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                  Have your resume rewritten & matched to this exact Job Description by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We incorporate every missing skill naturally, rewrite your bullets with quantifiable impact, and guarantee a 90+ match score.
+                  Have your resume reviewed & matched to this exact Job Description by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We incorporate relevant missing skills naturally, rewrite your bullets with quantifiable impact, and optimize for top ATS performance.
                 </p>
                 <div className="pt-1 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-400">
-                  <span className="flex items-center gap-1 text-neutral-300">✓ 100% JD Keyword Matching</span>
+                  <span className="flex items-center gap-1 text-neutral-300">✓ Targeted JD Keyword Alignment</span>
                   <span className="flex items-center gap-1 text-neutral-300">✓ Google X-Y-Z Bullet Phrasing</span>
                   <span className="flex items-center gap-1 text-neutral-300">✓ Delivered in 24–48 Hours</span>
                 </div>
@@ -1224,7 +1224,7 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
                   Want Us to Personally Tailor Your Resume?
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                  Get your resume rewritten & engineered by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We rewrite your project bullets using the Google X-Y-Z formula, fix all ATS parsing red flags, and guarantee a 90+ score.
+                  Get your resume reviewed & optimized by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We rewrite your project bullets using the Google X-Y-Z formula, eliminate ATS parsing pitfalls, and maximize your interview callback rate.
                 </p>
                 <div className="pt-1 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-400">
                   <span className="flex items-center gap-1 text-neutral-300">✓ 1-Page ATS Single Column</span>
