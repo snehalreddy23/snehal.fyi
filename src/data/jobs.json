@@ -1,5 +1,55 @@
 [
   {
+    "id": "102",
+    "slug": "solenis-data-analyst-8802",
+    "company": "Solenis",
+    "role": "Data Analyst",
+    "category": "Software",
+    "badge": "Active",
+    "logoBg": "bg-emerald-600",
+    "location": "Hyderabad",
+    "jobType": "Full-Time",
+    "batch": [
+      "2025",
+      "2026",
+      "2024"
+    ],
+    "salary": "Best in Industry",
+    "experience": "Freshers / 0-1 yrs",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://solenis.wd1.myworkdayjobs.com/Solenis/job/Hyderabad-India/Data-Analyst_R0034547?mode=apply&iis=LinkedIn",
+    "eligibility": [
+      "B.Tech / B.E / BCA / MCA / B.Sc or related degree",
+      "Eligible batches: 2025, 2026, 2024",
+      "Strong fundamental knowledge and quick learning mindset"
+    ],
+    "description": "Solenis  is actively hiring for the position of Data Analyst . Freshers and early career professionals with relevant problem solving skills are encouraged to apply directly.",
+    "responsibilities": [
+      "Collaborate with cross-functional teams to build and scale features.",
+      "Write clean, maintainable, and well-tested code.",
+      "Participate in agile sprints, code reviews, and technical documentation."
+    ],
+    "requirements": [
+      "Familiarity with core programming fundamentals and databases.",
+      "Good communication and collaborative problem-solving skills.",
+      "Demonstrated project portfolio or previous internship experience is a plus."
+    ],
+    "selectionProcess": [
+      "Round 1: Online Assessment / Resume Shortlisting",
+      "Round 2: Technical Interview (Core Concepts + Problem Solving)",
+      "Round 3: HR / Fitment Discussion"
+    ],
+    "snehalTips": "Tailor your resume specifically for Data Analyst  at Solenis . Keep it strictly to 1 page with live project links.",
+    "featured": true,
+    "tags": [
+      "Solenis ",
+      "Data Analyst ",
+      "Software",
+      "Freshers"
+    ]
+  },
+  {
     "id": "101",
     "slug": "aon-associate-software-engineer",
     "company": "Aon",
@@ -9,7 +59,10 @@
     "logoBg": "bg-red-600",
     "location": "Gurgaon (In-Person Interviews)",
     "jobType": "Full-Time",
-    "batch": ["2025", "2026"],
+    "batch": [
+      "2025",
+      "2026"
+    ],
     "salary": "₹8.0 - ₹12.0 LPA (Best in Industry)",
     "experience": "Freshers (2025 / 2026 Batch)",
     "postedDate": "Today",
@@ -46,6 +99,16 @@
     ],
     "snehalTips": "Aon explicitly highlights AI-Augmented Engineering as a core expectation, not an optional bonus. In your application and interview, highlight how you use AI coding tools responsibly alongside strong fundamentals in C#/.NET or React, and confirm your availability for in-person interviews at their Gurgaon office.",
     "featured": true,
-    "tags": ["Aon", "Software Engineer", "Gurgaon", "2026 Batch", "2025 Batch", "Full-Time", "C# / .NET", "React", "AI Tools"]
+    "tags": [
+      "Aon",
+      "Software Engineer",
+      "Gurgaon",
+      "2026 Batch",
+      "2025 Batch",
+      "Full-Time",
+      "C# / .NET",
+      "React",
+      "AI Tools"
+    ]
   }
 ]
