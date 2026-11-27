@@ -53,7 +53,7 @@ export default function EnterpriseAIGradingView({
                 </span>
               </div>
               <p className="text-xs text-neutral-400 mt-0.5">
-                Auditing Workday HiredScore grade, Darwinbox knockout rules & Google X-Y-Z metrics...
+                Auditing ATS Readiness Grade, eligibility criteria & Google X-Y-Z metrics...
               </p>
             </div>
           </div>
@@ -67,7 +67,14 @@ export default function EnterpriseAIGradingView({
 
   if (!aiReport) return null;
 
-  // Grade badge color schemes (Workday A-D)
+  const currentGrade = aiReport.readinessGrade || aiReport.workdayGrade || "C";
+  const currentGradeLabel = aiReport.readinessGradeLabel || aiReport.workdayGradeLabel || `Tier ${currentGrade}`;
+  const elig = aiReport.eligibilityStatus || aiReport.knockoutStatus || {
+    passed: true,
+    details: "Passed prerequisite eligibility screening.",
+  };
+
+  // Grade badge color schemes (A-D)
   const gradeStyles = {
     A: {
       bg: "bg-emerald-500/10",
@@ -97,7 +104,7 @@ export default function EnterpriseAIGradingView({
       badge: "bg-rose-500/20 text-rose-300 border-rose-500/40",
       glow: "shadow-rose-500/10",
     },
-  }[aiReport.workdayGrade] || {
+  }[currentGrade] || {
     bg: "bg-blue-500/10",
     border: "border-blue-500/30",
     text: "text-blue-400",
@@ -107,7 +114,7 @@ export default function EnterpriseAIGradingView({
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-3 duration-500">
-      {/* 1. Workday & Darwinbox Grade Header */}
+      {/* 1. Readiness Grade & Eligibility Header */}
       <div className={`apple-glass rounded-3xl p-6 sm:p-8 border ${gradeStyles.border} shadow-2xl relative overflow-hidden`}>
         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -118,10 +125,10 @@ export default function EnterpriseAIGradingView({
               className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl ${gradeStyles.bg} border ${gradeStyles.border} flex flex-col items-center justify-center shrink-0 shadow-lg ${gradeStyles.glow}`}
             >
               <span className={`text-4xl sm:text-5xl font-black ${gradeStyles.text} tracking-tight`}>
-                {aiReport.workdayGrade}
+                {currentGrade}
               </span>
               <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">
-                Workday Grade
+                Readiness Tier
               </span>
             </div>
 
@@ -132,17 +139,17 @@ export default function EnterpriseAIGradingView({
                   Enterprise ATS Standard
                 </span>
                 <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${gradeStyles.badge}`}>
-                  {aiReport.workdayGradeLabel}
+                  {currentGradeLabel}
                 </span>
-                {aiReport.knockoutStatus.passed ? (
+                {elig.passed ? (
                   <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                    Knockout Filters Passed
+                    Eligibility Met
                   </span>
                 ) : (
                   <span className="text-[11px] font-semibold text-rose-300 bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                     <AlertTriangle className="w-3 h-3 text-rose-400" />
-                    Knockout Flagged
+                    Eligibility Flagged
                   </span>
                 )}
               </div>
@@ -156,7 +163,7 @@ export default function EnterpriseAIGradingView({
               </p>
 
               <p className="text-[11px] text-neutral-400 pt-1">
-                <span className="text-neutral-500">Eligibility check:</span> {aiReport.knockoutStatus.details}
+                <span className="text-neutral-500">Eligibility check:</span> {elig.details}
               </p>
             </div>
           </div>

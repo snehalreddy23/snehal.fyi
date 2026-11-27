@@ -127,18 +127,18 @@ export function generateRulesOnlyReport(
     parseabilityScore + hardSkillsScore + quantificationScore + eligibilityScore + clarityScore
   ));
 
-  // Workday Grade Determination
-  let workdayGrade: "A" | "B" | "C" | "D" = "C";
-  let workdayGradeLabel = "Grade C — Gaps Identified (Moderate Match)";
+  // Readiness Grade Determination
+  let readinessGrade: "A" | "B" | "C" | "D" = "C";
+  let readinessGradeLabel = "Tier C — Gaps Identified (Moderate Match)";
   if (overallScore >= 85) {
-    workdayGrade = "A";
-    workdayGradeLabel = "Grade A — Top Tier Fit (High Interview Probability)";
+    readinessGrade = "A";
+    readinessGradeLabel = "Tier A — Top-Tier Fit (High Interview Probability)";
   } else if (overallScore >= 70) {
-    workdayGrade = "B";
-    workdayGradeLabel = "Grade B — Strong Candidate (Meets Core Thresholds)";
+    readinessGrade = "B";
+    readinessGradeLabel = "Tier B — Strong Fit (Meets Core Thresholds)";
   } else if (overallScore < 50) {
-    workdayGrade = "D";
-    workdayGradeLabel = "Grade D — Filter Risk (Critical Skills & Formatting Gaps)";
+    readinessGrade = "D";
+    readinessGradeLabel = "Tier D — High Filter Risk (Critical Skills & Formatting Gaps)";
   }
 
   // Critical Red Flags
@@ -197,24 +197,35 @@ export function generateRulesOnlyReport(
     };
   });
 
+  const eligibilityPassed = eligibilityScore >= 10 && missingCriticalSkills.length <= 3;
+
   return {
     overallScore,
-    workdayGrade,
-    workdayGradeLabel,
-    summaryVerdict: knockoutPassed
-      ? `Workday Grade ${workdayGrade}: Candidate demonstrates required core fundamentals. Passing automated ATS knockout screens.`
-      : `Workday Grade ${workdayGrade}: Missing key stack proficiencies or formatting metrics. Immediate optimization recommended.`,
+    readinessGrade,
+    readinessGradeLabel,
+    summaryVerdict: eligibilityPassed
+      ? `Readiness Grade ${readinessGrade}: Candidate demonstrates required core fundamentals and passes prerequisite eligibility criteria.`
+      : `Readiness Grade ${readinessGrade}: Missing key stack proficiencies or formatting metrics. Optimization recommended before applying.`,
+    eligibilityStatus: {
+      passed: eligibilityPassed,
+      details: eligibilityPassed
+        ? "Passed automated batch, education, and prerequisite keyword eligibility checks."
+        : `Eligibility Flag: Missing critical technical keywords (${missingCriticalSkills.join(", ") || "stack alignment"}).`,
+    },
+    // Backwards-compatible aliases
+    workdayGrade: readinessGrade,
+    workdayGradeLabel: readinessGradeLabel,
     knockoutStatus: {
-      passed: knockoutPassed,
-      details: knockoutPassed
-        ? "Passed all automated batch, education, and prerequisite keyword knockout checks."
-        : `Flagged on knockout criteria: Missing critical technical keywords (${missingCriticalSkills.join(", ") || "stack alignment"}).`,
+      passed: eligibilityPassed,
+      details: eligibilityPassed
+        ? "Passed automated batch, education, and prerequisite keyword eligibility checks."
+        : `Eligibility Flag: Missing critical technical keywords (${missingCriticalSkills.join(", ") || "stack alignment"}).`,
     },
     scores: {
       parseability: { score: parseabilityScore, max: 20, label: "Document Parseability" },
       hardSkills: { score: hardSkillsScore, max: 25, label: "Hard Skills & Tech Stack" },
       quantification: { score: quantificationScore, max: 25, label: "Google X-Y-Z Quantification" },
-      eligibility: { score: eligibilityScore, max: 15, label: "Knockout & Batch Match" },
+      eligibility: { score: eligibilityScore, max: 15, label: "Eligibility & Batch Screening" },
       clarity: { score: clarityScore, max: 15, label: "Clarity & Cliché Elimination" },
     },
     detectedSkills: detectedSkills.slice(0, 14),

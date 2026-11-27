@@ -123,13 +123,30 @@ Responsibilities:
     }
   }, [searchParams]);
 
+  const getSessionId = (): string => {
+    if (typeof window === "undefined") return "browser_client";
+    try {
+      let sid = localStorage.getItem("snehal_ats_session_id");
+      if (!sid) {
+        sid = "sid_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
+        localStorage.setItem("snehal_ats_session_id", sid);
+      }
+      return sid;
+    } catch {
+      return "browser_client";
+    }
+  };
+
   const executeAiScan = async (text: string, jd?: string, role?: string) => {
     if (!text.trim()) return;
     setIsAiScanning(true);
     try {
       const res = await fetch("/api/ats/scan", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-session-id": getSessionId(),
+        },
         body: JSON.stringify({
           resumeText: text,
           jobDescription: jd && jd.trim().length > 0 ? jd : undefined,
@@ -676,7 +693,7 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
         </div>
       </div>
 
-      {/* Enterprise AI ATS Analysis (Workday HiredScore + Darwinbox Sense) */}
+      {/* Enterprise ATS Readiness & Eligibility Engine */}
       {(aiReport || isAiScanning) && (
         <EnterpriseAIGradingView
           aiReport={aiReport}

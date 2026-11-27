@@ -38,10 +38,10 @@ export interface BlogPost {
 
 export interface EnterpriseAIReport {
   overallScore: number;
-  workdayGrade: "A" | "B" | "C" | "D";
-  workdayGradeLabel: string;
+  readinessGrade: "A" | "B" | "C" | "D";
+  readinessGradeLabel: string;
   summaryVerdict: string;
-  knockoutStatus: {
+  eligibilityStatus: {
     passed: boolean;
     details: string;
   };
@@ -64,4 +64,11 @@ export interface EnterpriseAIReport {
   isRulesOnlyFallback?: boolean;
   rateLimitNotice?: string;
   cached?: boolean;
+  // Backwards compatibility aliases
+  workdayGrade?: "A" | "B" | "C" | "D";
+  workdayGradeLabel?: string;
+  knockoutStatus?: {
+    passed: boolean;
+    details: string;
+  };
 }
