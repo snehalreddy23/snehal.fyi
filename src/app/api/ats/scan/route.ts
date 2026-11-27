@@ -220,11 +220,11 @@ export async function POST(request: Request) {
     }
 
     const userContent = `RESUME TEXT (PII ANONYMIZED):
-${sanitizedResume.slice(0, 8000)}
+${sanitizedResume.slice(0, 4500)}
 
 ${
   targetJobContext.trim().length > 0
-    ? `TARGET JOB REQUIREMENTS:\n${targetJobContext.slice(0, 3000)}`
+    ? `TARGET JOB REQUIREMENTS:\n${targetJobContext.slice(0, 2000)}`
     : `TARGET ROLE: ${role || "Software Engineer / Data Engineer"}`
 }`;
 
