@@ -11,7 +11,7 @@ export default function JobShareButtons({ job }: { job: Job }) {
     if (typeof window !== "undefined") {
       return `${window.location.origin}/jobs/${job.slug}`;
     }
-    return `https://snehal.fyi/jobs/${job.slug}`;
+    return `https://snehal-fyi.vercel.app/jobs/${job.slug}`;
   };
 
   const copyToClipboard = async () => {

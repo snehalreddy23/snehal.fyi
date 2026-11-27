@@ -2,6 +2,12 @@ import { Job } from "@/types";
 
 const DEFAULT_CHANNEL_ID = "@snehal_fyi";
 
+export function getSiteBaseUrl(): string {
+  const custom = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (custom) return custom.replace(/\/$/, "");
+  return "https://snehal-fyi.vercel.app";
+}
+
 export function getTelegramConfig() {
   const token = process.env.TELEGRAM_BOT_TOKEN?.trim() || "";
   const channelId = process.env.TELEGRAM_CHANNEL_ID?.trim() || DEFAULT_CHANNEL_ID;
@@ -27,6 +33,8 @@ export function formatTelegramJobPost(job: Job): string {
   const experienceEscaped = escapeHtml(job.experience);
   const tipsEscaped = escapeHtml(job.snehalTips);
 
+  const baseUrl = getSiteBaseUrl();
+
   return `🚨 <b>OFF-CAMPUS HIRING: ${companyEscaped.toUpperCase()}</b> 🚨
 
 🔥 <b>Role:</b> ${roleEscaped}
@@ -43,8 +51,8 @@ ${eligibilityList}
 ${tipsEscaped}
 
 🔗 <b>Direct Official Apply Link:</b>
-👉 https://snehal.fyi/jobs/${job.slug}
-<i>(Fast Shortlink: https://snehal.fyi/j/${job.id})</i>
+👉 ${baseUrl}/jobs/${job.slug}
+<i>(Fast Shortlink: ${baseUrl}/j/${job.id})</i>
 
 ⚡ <b>Join Telegram for daily verified off-campus alerts:</b>
 👉 @snehal_fyi | https://t.me/snehal_fyi`;
