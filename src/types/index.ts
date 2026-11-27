@@ -61,4 +61,7 @@ export interface EnterpriseAIReport {
     issue: string;
     improvedXYZ: string;
   }>;
+  isRulesOnlyFallback?: boolean;
+  rateLimitNotice?: string;
+  cached?: boolean;
 }

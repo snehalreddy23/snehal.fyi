@@ -161,14 +161,46 @@ export default function EnterpriseAIGradingView({
             </div>
           </div>
 
-          {/* Model Stamp */}
-          <div className="self-end lg:self-center text-right shrink-0">
-            <span className="inline-flex items-center gap-1 text-[10px] text-neutral-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
-              <Sparkles className="w-3 h-3 text-blue-400" />
-              Groq LPU • Meta LLaMA 3.3 (120B)
-            </span>
-          </div>
-        </div>
+              {/* Model / Engine Stamp */}
+              <div className="self-end lg:self-center text-right shrink-0 flex flex-col items-end gap-1.5">
+                {aiReport.cached && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-full">
+                    <Zap className="w-3 h-3 text-emerald-400" />
+                    Instant Cache (0ms)
+                  </span>
+                )}
+                {aiReport.isRulesOnlyFallback ? (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-full">
+                    <Zap className="w-3 h-3 text-amber-400" />
+                    Heuristic Rules Engine
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-[10px] text-neutral-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
+                    <Sparkles className="w-3 h-3 text-blue-400" />
+                    Groq LPU • AI Tiered Engine
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Rate Limit Fair-Usage Alert (if applicable) */}
+            {aiReport.rateLimitNotice && (
+              <div className="mt-4 p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2.5 text-xs text-amber-300">
+                <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>{aiReport.rateLimitNotice}</span>
+              </div>
+            )}
+
+            {/* Privacy & Compliance Assurance Badge */}
+            <div className="mt-4 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between flex-wrap gap-2 text-[11px] text-neutral-400">
+              <span className="flex items-center gap-1.5 text-neutral-300">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span><strong>Privacy Guaranteed:</strong> Candidate names, emails, phones & handles are stripped before AI evaluation.</span>
+              </span>
+              <span className="text-[10px] text-neutral-500">
+                DPDP Act 2023 & GDPR Compliant • Zero Data Retention
+              </span>
+            </div>
 
         {/* 2. Five Pillar Score Bars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-6 pt-6 border-t border-white/[0.08]">
