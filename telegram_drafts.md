@@ -1,7 +1,34 @@
 # Telegram Broadcast Drafts for @snehal_fyi
 
 > Generated for snehal.fyi  
-> Last Updated: November 27, 2026
+> Last Updated: November 28, 2026
+
+---
+
+### 📢 Broadcast Post: Solenis Data Analyst (2024, 2025, 2026 Batch)
+
+🚨 **OFF-CAMPUS HIRING: SOLENIS** 🚨  
+🔥 **Role:** Data Analyst  
+🏢 **Company:** Solenis  
+💰 **Salary / CTC:** Best in Industry  
+📍 **Location:** Hyderabad  
+🎓 **Eligible Batches:** 2024, 2025, 2026 Passouts  
+💼 **Experience:** Freshers / 0–1 yrs  
+
+📌 **Key Eligibility:**
+- B.Tech / B.E / BCA / MCA / B.Sc or related degree
+- Strong fundamental knowledge, databases, and problem-solving
+- Freshers and early career professionals welcome
+
+💡 **Snehal's Pro Tip:**  
+Tailor your resume specifically for Data Analyst at Solenis. Highlight SQL queries, data reporting, and live project links. Keep it strictly to 1 page!
+
+🔗 **Direct Official Apply Link:**  
+👉 https://snehal-fyi.vercel.app/jobs/solenis-data-analyst-8802  
+*(Fast Shortlink: https://snehal-fyi.vercel.app/j/102)*
+
+⚡ **Join Telegram for daily verified off-campus alerts:**  
+👉 @snehal_fyi | https://t.me/snehal_fyi
 
 ---
 
@@ -25,8 +52,8 @@
 Aon explicitly treats AI-augmented development as a core requirement. Make sure your 1-page ATS resume mentions both core fundamentals (DSA/OOP/React/SQL) AND modern AI productivity practices. Confirm your availability for Gurgaon in-person rounds!
 
 🔗 **Direct Official Apply Link:**  
-👉 https://snehal.fyi/jobs/aon-associate-software-engineer  
-*(Shortlink: https://snehal.fyi/j/101)*
+👉 https://snehal-fyi.vercel.app/jobs/aon-associate-software-engineer  
+*(Fast Shortlink: https://snehal-fyi.vercel.app/j/101)*
 
 ⚡ **Join Telegram for direct off-campus alerts:**  
 👉 @snehal_fyi | https://t.me/snehal_fyi
