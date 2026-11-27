@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import InstagramIcon from "@/components/InstagramIcon";
 import { JOBS_DATA } from "@/data/jobs";
+import EnterpriseAIGradingView from "@/components/EnterpriseAIGradingView";
+import { EnterpriseAIReport } from "@/types";
 import {
   analyzeResume,
   analyzeJobMatch,
@@ -37,6 +39,7 @@ function ATSCheckerContent() {
   // Inputs
   const [resumeText, setResumeText] = useState("");
   const [jobDescription, setJobDescription] = useState("");
+  const [selectedJobId, setSelectedJobId] = useState("");
   const [targetRole, setTargetRole] = useState("sde");
   const [fileName, setFileName] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"paste" | "upload">("paste");
@@ -45,6 +48,8 @@ function ATSCheckerContent() {
   const [isScanning, setIsScanning] = useState(false);
   const [generalReport, setGeneralReport] = useState<ATSReport | null>(null);
   const [matchReport, setMatchReport] = useState<JobMatchReport | null>(null);
+  const [aiReport, setAiReport] = useState<EnterpriseAIReport | null>(null);
+  const [isAiScanning, setIsAiScanning] = useState(false);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedReport, setCopiedReport] = useState(false);
 
@@ -106,15 +111,56 @@ Responsibilities:
     if (jobSlug) {
       const found = JOBS_DATA.find((j) => j.slug === jobSlug || j.id === jobSlug);
       if (found) {
+        setSelectedJobId(found.id);
         setScannerMode("job-specific");
         const formattedJd = `${found.company} — ${found.role}\nLocation: ${found.location} | Batches: ${found.batch.join(", ")} | CTC: ${found.salary}\n\nJob Description:\n${found.description}\n\nKey Responsibilities:\n${found.responsibilities.join("\n")}\n\nRequirements & Skills:\n${found.requirements.join("\n")}\n\nEligibility:\n${found.eligibility.join("\n")}`;
         setJobDescription(formattedJd);
         if (resumeText.trim()) {
           setMatchReport(analyzeJobMatch(resumeText, formattedJd));
+          executeAiScan(resumeText, formattedJd, targetRole);
         }
       }
     }
   }, [searchParams]);
+
+  const executeAiScan = async (text: string, jd?: string, role?: string) => {
+    if (!text.trim()) return;
+    setIsAiScanning(true);
+    try {
+      const res = await fetch("/api/ats/scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          resumeText: text,
+          jobDescription: jd && jd.trim().length > 0 ? jd : undefined,
+          role: role || targetRole,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.report) {
+          setAiReport(data.report);
+        }
+      }
+    } catch (err) {
+      console.warn("AI ATS scan notice:", err);
+    } finally {
+      setIsAiScanning(false);
+    }
+  };
+
+  const handleSelectJob = (jobId: string) => {
+    setSelectedJobId(jobId);
+    const found = JOBS_DATA.find((j) => j.id === jobId);
+    if (found) {
+      const jd = `${found.company} — ${found.role}\nLocation: ${found.location} | Batches: ${found.batch.join(", ")} | CTC: ${found.salary}\n\nJob Description:\n${found.description}\n\nKey Responsibilities:\n${found.responsibilities.join("\n")}\n\nRequirements & Skills:\n${found.requirements.join("\n")}\n\nEligibility:\n${found.eligibility.join("\n")}`;
+      setJobDescription(jd);
+      if (resumeText.trim()) {
+        setMatchReport(analyzeJobMatch(resumeText, jd));
+        executeAiScan(resumeText, jd, targetRole);
+      }
+    }
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -143,8 +189,10 @@ Responsibilities:
 
         if (scannerMode === "general") {
           setGeneralReport(analyzeResume(fullText, targetRole));
+          executeAiScan(fullText, undefined, targetRole);
         } else if (jobDescription.trim()) {
           setMatchReport(analyzeJobMatch(fullText, jobDescription));
+          executeAiScan(fullText, jobDescription, targetRole);
         }
       } catch (err) {
         console.error("PDF Parsing error:", err);
@@ -159,8 +207,10 @@ Responsibilities:
         setResumeText(text);
         if (scannerMode === "general") {
           setGeneralReport(analyzeResume(text, targetRole));
+          executeAiScan(text, undefined, targetRole);
         } else if (jobDescription.trim()) {
           setMatchReport(analyzeJobMatch(text, jobDescription));
+          executeAiScan(text, jobDescription, targetRole);
         }
       };
       reader.readAsText(file);
@@ -176,6 +226,7 @@ Responsibilities:
       if (scannerMode === "general") {
         const result = analyzeResume(resumeText, targetRole);
         setGeneralReport(result);
+        executeAiScan(resumeText, undefined, targetRole);
       } else {
         if (!jobDescription.trim()) {
           alert("Please paste the target Job Description to compare your resume against.");
@@ -184,6 +235,7 @@ Responsibilities:
         }
         const match = analyzeJobMatch(resumeText, jobDescription);
         setMatchReport(match);
+        executeAiScan(resumeText, jobDescription, targetRole);
       }
       setIsScanning(false);
       window.scrollTo({ top: 440, behavior: "smooth" });
@@ -196,16 +248,22 @@ Responsibilities:
     if (scannerMode === "job-specific") {
       setJobDescription(sampleJD);
       setMatchReport(analyzeJobMatch(sampleResume, sampleJD));
+      executeAiScan(sampleResume, sampleJD, targetRole);
     } else {
       setGeneralReport(analyzeResume(sampleResume, targetRole));
+      executeAiScan(sampleResume, undefined, targetRole);
     }
   };
 
   const clearAll = () => {
     setResumeText("");
+    setJobDescription("");
+    setSelectedJobId("");
     setFileName(null);
     setGeneralReport(null);
     setMatchReport(null);
+    setAiReport(null);
+    setIsAiScanning(false);
     setCopiedPrompt(false);
     setCopiedReport(false);
     if (fileInputRef.current) {
@@ -446,23 +504,24 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
             {/* Quick Load live jobs from snehal.fyi */}
             <div className="pt-1 flex flex-wrap items-center gap-1.5">
               <span className="text-[11px] text-neutral-400">Quick-load opening:</span>
-              {JOBS_DATA.map((job) => (
-                <button
-                  key={job.id}
-                  type="button"
-                  onClick={() => {
-                    const jd = `${job.company} — ${job.role}\nLocation: ${job.location} | Batches: ${job.batch.join(", ")} | CTC: ${job.salary}\n\nJob Description:\n${job.description}\n\nKey Responsibilities:\n${job.responsibilities.join("\n")}\n\nRequirements & Skills:\n${job.requirements.join("\n")}\n\nEligibility:\n${job.eligibility.join("\n")}`;
-                    setJobDescription(jd);
-                    if (resumeText.trim()) {
-                      setMatchReport(analyzeJobMatch(resumeText, jd));
-                    }
-                  }}
-                  className="text-[11px] px-2.5 py-1 rounded-lg bg-white/[0.05] hover:bg-white/10 text-neutral-300 hover:text-white border border-white/[0.08] transition flex items-center gap-1"
-                >
-                  <span className="font-medium text-white">{job.company}</span>
-                  <span className="text-neutral-500">({job.role.split(" ")[0]})</span>
-                </button>
-              ))}
+              {JOBS_DATA.map((job) => {
+                const isSelected = selectedJobId === job.id;
+                return (
+                  <button
+                    key={job.id}
+                    type="button"
+                    onClick={() => handleSelectJob(job.id)}
+                    className={`text-[11px] px-2.5 py-1 rounded-lg transition flex items-center gap-1 ${
+                      isSelected
+                        ? "bg-blue-600/20 text-blue-300 border border-blue-500/40 font-semibold"
+                        : "bg-white/[0.05] hover:bg-white/10 text-neutral-300 hover:text-white border border-white/[0.08]"
+                    }`}
+                  >
+                    <span className="font-medium text-white">{job.company}</span>
+                    <span className="text-neutral-400">({job.role.split(" ")[0]})</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
@@ -616,6 +675,25 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
           </button>
         </div>
       </div>
+
+      {/* Enterprise AI ATS Analysis (Workday HiredScore + Darwinbox Sense) */}
+      {(aiReport || isAiScanning) && (
+        <EnterpriseAIGradingView
+          aiReport={aiReport}
+          isAiScanning={isAiScanning}
+          targetRoleName={
+            scannerMode === "job-specific"
+              ? "Target Job Match & Role Fit"
+              : targetRole === "sde"
+              ? "Software Development Engineer"
+              : targetRole === "data"
+              ? "Data Engineer & Analyst"
+              : targetRole === "frontend"
+              ? "Frontend Engineer"
+              : "General Tech & IT"
+          }
+        />
+      )}
 
       {/* ============================================================ */}
       {/* JOB-SPECIFIC REPORT OUTPUT */}

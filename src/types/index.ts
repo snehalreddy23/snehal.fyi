@@ -35,3 +35,30 @@ export interface BlogPost {
   content: string; // Markdown or formatted HTML/string
   tags: string[];
 }
+
+export interface EnterpriseAIReport {
+  overallScore: number;
+  workdayGrade: "A" | "B" | "C" | "D";
+  workdayGradeLabel: string;
+  summaryVerdict: string;
+  knockoutStatus: {
+    passed: boolean;
+    details: string;
+  };
+  scores: {
+    parseability: { score: number; max: number; label: string };
+    hardSkills: { score: number; max: number; label: string };
+    quantification: { score: number; max: number; label: string };
+    eligibility: { score: number; max: number; label: string };
+    clarity: { score: number; max: number; label: string };
+  };
+  detectedSkills: string[];
+  missingCriticalSkills: string[];
+  criticalRedFlags: string[];
+  aiBuzzwordsFound: string[];
+  bulletRewrites: Array<{
+    originalBullet: string;
+    issue: string;
+    improvedXYZ: string;
+  }>;
+}
