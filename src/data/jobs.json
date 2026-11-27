@@ -1,257 +1,51 @@
 [
   {
     "id": "101",
-    "slug": "google-associate-cloud-engineer",
-    "company": "Google",
-    "role": "Associate Cloud Engineer",
+    "slug": "aon-associate-software-engineer",
+    "company": "Aon",
+    "role": "Associate Software Engineer",
     "category": "Software",
     "badge": "Hot",
-    "logoBg": "bg-blue-600",
-    "location": "Bengaluru / Hyderabad",
+    "logoBg": "bg-red-600",
+    "location": "Gurgaon (In-Person Interviews)",
     "jobType": "Full-Time",
-    "batch": ["2025", "2026", "2027+"],
-    "salary": "₹18 - ₹24 LPA",
-    "experience": "Recent Grads & Freshers",
+    "batch": ["2025", "2026"],
+    "salary": "₹8.0 - ₹12.0 LPA (Best in Industry)",
+    "experience": "Freshers (2025 / 2026 Batch)",
     "postedDate": "Today",
-    "deadline": "Apply ASAP",
-    "applyUrl": "https://careers.google.com/jobs/results/",
+    "deadline": "Apply ASAP (Active Hiring)",
+    "applyUrl": "https://jobs.aon.com/jobs/113134?lang=en-us&iis=Job+Board&iisn=LinkedIn",
     "eligibility": [
-      "B.Tech / B.E / M.Tech in CS, IT, ECE, or related STEM fields",
-      "Batch: 2025, 2026, and 2027+ recent grads & final year students",
-      "Minimum 65% or 6.5 CGPA in graduation with no active backlogs",
-      "Familiarity with at least one programming language (Python, Java, Go, or C++)"
+      "2025 and 2026 graduates available to join full-time",
+      "0–1 year of professional software engineering experience (freshers encouraged to apply)",
+      "Strong coding and problem-solving skills demonstrated through assessments and interviews",
+      "Candidates should be willing to attend the interview process in-person at the Aon Gurgaon office",
+      "Foundational exposure to C#/.NET, SQL, JavaScript, or React (coursework, internships, or personal projects)",
+      "A genuine interest in using AI tools to learn and work more effectively (Core Expectation)"
     ],
-    "description": "Google is inviting applications for Associate Cloud Engineers. In this role, you will work closely with engineering teams to deploy, monitor, and maintain scalable cloud architecture on Google Cloud Platform (GCP).",
+    "description": "Aon is hiring Associate Software Engineers within their Assessment Solutions business in Gurgaon. You will start your engineering career building real, mission-critical features on the enterprise Aon Assessment Platform used by millions of candidates and employers worldwide.",
     "responsibilities": [
-      "Collaborate with senior software engineers to build reliable cloud infrastructure.",
-      "Automate deployment pipelines and cloud monitoring dashboards.",
-      "Troubleshoot operational issues and participate in architecture reviews.",
-      "Write clean, maintainable infrastructure-as-code scripts using Terraform."
+      "Implement well-scoped features, bug fixes, and enhancements under the guidance of your Team Lead and senior engineers.",
+      "Write clean, tested code across the stack — C#/.NET services, SQL Server data access, and React front-ends.",
+      "Write unit and integration tests for delivered code as a core part of 'done' rather than an optional extra.",
+      "Fix defects identified by QA or reported in production, learning to diagnose root causes rather than just patching symptoms.",
+      "Use modern AI tools in your day-to-day work for learning, coding assistance, debugging, and documentation as a core engineering habit.",
+      "Participate actively in code reviews, layered architecture discussions, and daily agile squad activities."
     ],
     "requirements": [
-      "Strong grasp of Computer Science fundamentals: OS, Networking, and Databases.",
-      "Hands-on practice with Linux CLI and basic Git commands.",
-      "Good communication and problem-solving mindset.",
-      "Any project deployed on Cloud (AWS/GCP/Azure) is a bonus."
+      "Solid foundation in programming fundamentals: Data Structures, Algorithms, and Object-Oriented Design.",
+      "Some exposure to C#/.NET, SQL queries, JavaScript, or React.",
+      "Strong problem-solving ability, proactive communication, and eagerness to learn from feedback.",
+      "Comfortable working in an international team environment across time zones.",
+      "Genuine enthusiasm for modern AI-augmented software engineering workflows."
     ],
     "selectionProcess": [
-      "Round 1: Online Coding & Aptitude Assessment (90 mins)",
-      "Round 2: Technical Interview (DSA + Problem Solving)",
-      "Round 3: System Design / Cloud Fundamentals",
-      "Round 4: Googleyness & Culture Fitment Interview"
+      "Round 1: Online Coding & Cognitive Assessment Test",
+      "Round 2: Technical Interview (In-Person at Aon Gurgaon Office)",
+      "Round 3: Techno-Managerial & Squad Culture Fitment Round"
     ],
-    "snehalTips": "When applying on the Google career portal, ensure your resume highlights at least ONE live project hosted on the cloud (Vercel, Firebase, or GCP). Keep your resume strictly to 1 page.",
+    "snehalTips": "Aon explicitly highlights AI-Augmented Engineering as a core expectation, not an optional bonus. In your application and interview, highlight how you use AI coding tools responsibly alongside strong fundamentals in C#/.NET or React, and confirm your availability for in-person interviews at their Gurgaon office.",
     "featured": true,
-    "tags": ["Google", "Cloud", "Recent Grads", "Python", "High CTC"]
-  },
-  {
-    "id": "102",
-    "slug": "amazon-software-dev-engineer-intern",
-    "company": "Amazon",
-    "role": "Software Development Engineer (SDE) Intern",
-    "category": "Internship",
-    "badge": "Active",
-    "logoBg": "bg-amber-600",
-    "location": "Bengaluru / Chennai",
-    "jobType": "Internship",
-    "batch": ["2025", "2026", "2027+"],
-    "salary": "₹80,000 / month + PPO",
-    "experience": "College Students & Recent Grads",
-    "postedDate": "1 day ago",
-    "deadline": "Rolling Basis",
-    "applyUrl": "https://amazon.jobs/en/",
-    "eligibility": [
-      "Currently pursuing or completed B.E / B.Tech / M.Tech / MCA in Computer Science or allied branches",
-      "Graduating in 2025, 2026, or 2027+",
-      "Strong foundation in Data Structures, Algorithms, and Object-Oriented Design",
-      "No active backlogs at the time of application"
-    ],
-    "description": "Amazon is looking for high-energy SDE Interns for a 6-month internship with Pre-Placement Offer (PPO) opportunity. You will contribute code directly to production systems serving millions of customers.",
-    "responsibilities": [
-      "Design and implement scalable microservices using Java/C++.",
-      "Write unit and integration tests to ensure 99.99% code quality.",
-      "Participate in daily standups and sprint planning."
-    ],
-    "requirements": [
-      "Proficiency in Java, C++, or Python.",
-      "Comfortable with trees, graphs, dynamic programming, and complexity analysis.",
-      "Understanding of REST APIs and relational databases."
-    ],
-    "selectionProcess": [
-      "Step 1: Amazon Online Assessment (OA) on HackerRank (2 coding questions + Work Style Survey)",
-      "Step 2: Technical Interview Round 1 (DSA + Behavioral Leadership Principles)",
-      "Step 3: Technical Interview Round 2 (Code Optimization + System Knowledge)"
-    ],
-    "snehalTips": "Amazon OA heavily tests arrays, strings, and hash maps. Make sure you answer the 'Work Style Assessment' aligning with Amazon's 16 Leadership Principles (Customer Obsession & Bias for Action).",
-    "featured": true,
-    "tags": ["Amazon", "SDE Intern", "PPO", "Java", "DSA"]
-  },
-  {
-    "id": "103",
-    "slug": "tcs-digital-prime-hiring",
-    "company": "Tata Consultancy Services (TCS)",
-    "role": "TCS Digital / Prime Trainee",
-    "category": "Software",
-    "badge": "Hot",
-    "logoBg": "bg-indigo-600",
-    "location": "Pan India",
-    "jobType": "Full-Time",
-    "batch": ["2025", "2026"],
-    "salary": "₹7.0 - ₹9.2 LPA",
-    "experience": "Recent Grads Only",
-    "postedDate": "2 days ago",
-    "deadline": "Open until filled",
-    "applyUrl": "https://www.tcs.com/careers",
-    "eligibility": [
-      "B.Tech / B.E / M.Tech / M.Sc / MCA graduates",
-      "Batch 2025 and 2026 recent grads",
-      "Minimum 70% or 7.0 CGPA throughout 10th, 12th, and Degree",
-      "Maximum 1-year academic gap allowed with valid justification"
-    ],
-    "description": "TCS has opened the national qualifier for TCS Digital and Prime cadres. High-performing students get direct placement in cutting-edge AI, IoT, and Cloud business units.",
-    "responsibilities": [
-      "Develop next-generation software for global Fortune 500 enterprises.",
-      "Work with AI/ML frameworks, modern web applications, and cyber security protocols.",
-      "Undergo specialized digital training during onboarding."
-    ],
-    "requirements": [
-      "Good command over C, C++, Java, or Python.",
-      "Strong quantitative aptitude, logical reasoning, and verbal skills.",
-      "Eagerness to learn new digital technologies."
-    ],
-    "selectionProcess": [
-      "NQT (National Qualifier Test) - Cognitive + Advanced Coding",
-      "Technical Interview + Managerial Interview",
-      "HR Discussion & Document Verification"
-    ],
-    "snehalTips": "TCS Digital cutoff requires solving at least 1 complex coding problem completely in the advanced section. Practice string manipulation and matrix questions beforehand.",
-    "featured": true,
-    "tags": ["TCS", "Off-Campus", "Digital", "Pan India", "MNC"]
-  },
-  {
-    "id": "104",
-    "slug": "swiggy-associate-data-analyst",
-    "company": "Swiggy",
-    "role": "Associate Data Analyst Trainee",
-    "category": "Data & AI",
-    "badge": "Active",
-    "logoBg": "bg-orange-500",
-    "location": "Bengaluru (Hybrid)",
-    "jobType": "Full-Time",
-    "batch": ["2025", "2026", "2027+"],
-    "salary": "₹6.5 - ₹8.5 LPA",
-    "experience": "Recent Grads & Final Year",
-    "postedDate": "3 days ago",
-    "deadline": "Apply Soon",
-    "applyUrl": "https://careers.swiggy.com/",
-    "eligibility": [
-      "Any Graduate / Post Graduate (B.Tech, B.Sc Stats/Math, BCA, BBA, B.Com)",
-      "Batch 2025, 2026, or 2027+",
-      "Solid understanding of SQL queries and Microsoft Excel",
-      "Basic knowledge of Python (Pandas/NumPy) or Power BI / Tableau"
-    ],
-    "description": "Swiggy's analytics team is looking for young, data-driven minds to decode food ordering behaviors, delivery logistics, and restaurant growth patterns across 500+ Indian cities.",
-    "responsibilities": [
-      "Write SQL queries to extract data from warehouse tables.",
-      "Build interactive KPI dashboards in Power BI and Google Data Studio.",
-      "Assist product managers in A/B test analysis and cohort retention studies."
-    ],
-    "requirements": [
-      "Strong SQL skills (Joins, Window Functions, Group By, Subqueries).",
-      "Ability to translate raw numbers into meaningful visual stories.",
-      "Good analytical reasoning."
-    ],
-    "selectionProcess": [
-      "Round 1: SQL & Data Interpretation Test",
-      "Round 2: Live SQL & Business Case Study Interview",
-      "Round 3: Behavioral & Culture Fitment Round"
-    ],
-    "snehalTips": "Include a GitHub or portfolio link in your resume showing 1 or 2 interactive Power BI/Tableau dashboards. Recruiters love seeing live portfolios.",
-    "featured": false,
-    "tags": ["Swiggy", "Data Analyst", "SQL", "PowerBI", "Analytics"]
-  },
-  {
-    "id": "105",
-    "slug": "accenture-associate-software-engineer",
-    "company": "Accenture",
-    "role": "Associate Software Engineer (ASE)",
-    "category": "Software",
-    "badge": "Active",
-    "logoBg": "bg-purple-600",
-    "location": "Pan India",
-    "jobType": "Full-Time",
-    "batch": ["2025", "2026"],
-    "salary": "₹4.6 - ₹6.5 LPA",
-    "experience": "Recent Grads",
-    "postedDate": "4 days ago",
-    "deadline": "Open until filled",
-    "applyUrl": "https://www.accenture.com/in-en/careers",
-    "eligibility": [
-      "All engineering branches (B.E/B.Tech/M.E/M.Tech/MCA/M.Sc CS)",
-      "Batch 2025 and 2026",
-      "Minimum 60% or 6.0 CGPA",
-      "No active backlogs during the onboarding process"
-    ],
-    "description": "Accenture is hiring Associate Software Engineers across multiple Indian delivery centers. Excellent starting role with structured enterprise tech training.",
-    "responsibilities": [
-      "Develop software modules based on business requirements.",
-      "Perform code refactoring, testing, and system documentation.",
-      "Work in agile squads alongside senior enterprise architects."
-    ],
-    "requirements": [
-      "Basic understanding of any programming language (C/C++, Java, Python).",
-      "Good interpersonal and problem-solving skills."
-    ],
-    "selectionProcess": [
-      "Cognitive and Technical Assessment (English ability, Reasoning, Tech fundamentals)",
-      "Coding Assessment (2 problems)",
-      "Communication Assessment",
-      "Virtual Technical Interview"
-    ],
-    "snehalTips": "Accenture's Communication Assessment is automated via AI. Ensure you use a quiet room, speak clearly into the mic, and maintain proper grammar.",
-    "featured": false,
-    "tags": ["Accenture", "ASE", "Mass Hiring", "Recent Grads"]
-  },
-  {
-    "id": "106",
-    "slug": "cred-frontend-developer-intern",
-    "company": "CRED",
-    "role": "Frontend Engineering Intern (React/Next.js)",
-    "category": "Internship",
-    "badge": "Hot",
-    "logoBg": "bg-neutral-900",
-    "location": "Bengaluru",
-    "jobType": "Internship",
-    "batch": ["2025", "2026", "2027+"],
-    "salary": "₹60,000 / month Stipend",
-    "experience": "College Students & Recent Grads",
-    "postedDate": "Just now",
-    "deadline": "Immediate Joiner",
-    "applyUrl": "https://careers.cred.club/",
-    "eligibility": [
-      "Any degree, self-taught developers & college students welcome",
-      "Batch 2025, 2026, or 2027+",
-      "Strong portfolio of modern React / Next.js web applications",
-      "Deep care for UI animations, micro-interactions, and mobile responsiveness"
-    ],
-    "description": "CRED is looking for frontend interns who obsess over pixel perfection, smooth 60fps animations, and snappy UI performance.",
-    "responsibilities": [
-      "Build high-performance web interfaces using Next.js and Tailwind CSS.",
-      "Implement fluid animations with Framer Motion and WebGL.",
-      "Collaborate directly with product designers."
-    ],
-    "requirements": [
-      "Proficient in React, TypeScript, HTML5, and CSS3.",
-      "Experience with state management and API integrations.",
-      "A live portfolio site is mandatory."
-    ],
-    "selectionProcess": [
-      "Portfolio Review & Code Assignment (Build a replica widget)",
-      "Technical Discussion on Assignment & React internals",
-      "Founder / Lead Chat"
-    ],
-    "snehalTips": "CRED values design craft over degrees. Show live demo links and GitHub repositories with clean commits.",
-    "featured": true,
-    "tags": ["CRED", "Frontend", "React", "Next.js", "High Stipend"]
+    "tags": ["Aon", "Software Engineer", "Gurgaon", "2026 Batch", "2025 Batch", "Full-Time", "C# / .NET", "React", "AI Tools"]
   }
 ]
