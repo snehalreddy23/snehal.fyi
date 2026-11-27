@@ -91,6 +91,12 @@
 ### F. About Page (`/about`)
 - Removed "Founder" badge and replaced it with a friendly, approachable badge: `Feel free to connect`.
 
+### G. Antigravity Scheduled Automations
+- **Daily Fresher Job Finder (`daily-job-finder`):** Runs daily at 9:00 AM IST to scout recent verified fresher drives for 2025–2027 batches.
+- **Weekly Dead Link & Expired Job Cleanup (`weekly-job-cleanup`):** Runs every Sunday at 10:00 PM IST to check all `jobs.json` URLs for dead links or expired deadlines.
+- **Telegram Broadcast Drafter (`telegram-broadcast-drafter`):** Runs daily at 6:00 PM IST to draft high-engagement announcements for `@snehal_fyi` in `telegram_drafts.md`.
+- **Weekly Site Health & Growth Digest (`weekly-traffic-digest`):** Runs Mondays at 9:00 AM IST to verify build health (`npm run build`) and summarize active jobs.
+
 ---
 
 ## 3. All Official URLs & Handles
