@@ -13,6 +13,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://snehal-fyi.vercel.app"),
   title: "snehal.fyi | Fresher Jobs, Off-Campus Drives & Resume Playbook",
   description:
     "Curated off-campus drives, fresher tech & non-tech job updates, verified direct application links, and ATS resume tips for 2024, 2025, and 2026 batches.",
