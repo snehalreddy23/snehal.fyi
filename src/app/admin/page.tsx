@@ -267,7 +267,7 @@ export default function AdminPage() {
               </label>
               <input
                 type="password"
-                placeholder="Enter passcode (default: snehal2025)"
+                placeholder="Enter passcode"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
                 className="w-full px-4 py-3.5 bg-black/40 border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-sm"
@@ -301,9 +301,8 @@ export default function AdminPage() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-slate-500 mt-6">
-            Protected area. Passcode can be configured in Vercel environment
-            variables as <code className="text-slate-400">ADMIN_PASSCODE</code>.
+          <p className="text-center text-xs text-slate-600 mt-6">
+            Authorized administrator access only.
           </p>
         </div>
       </div>
@@ -856,7 +855,7 @@ export default function AdminPage() {
                   , add:
                   <div className="mt-1 font-mono text-[11px] text-slate-300 bg-black/60 p-2 rounded-lg border border-white/5 space-y-0.5">
                     <div>GITHUB_TOKEN=ghp_your_copied_token</div>
-                    <div>ADMIN_PASSCODE=your_secret_passcode (optional, defaults to snehal2025)</div>
+                    <div>ADMIN_PASSCODE=your_secret_passcode</div>
                   </div>
                 </li>
                 <li>
