@@ -72,10 +72,15 @@ You MUST reply with valid JSON ONLY matching this schema:
   ]
 }`;
 
-// Helper: Calls Groq with model cascading, timeout, and low reasoning effort
-async function callGroqModel(model: string, apiKey: string, userContent: string) {
+// Helper: Calls Groq with model cascading, timeout, and calibrated reasoning effort
+async function callGroqModel(
+  model: string,
+  apiKey: string,
+  userContent: string,
+  effort: "medium" | "low" = "medium"
+) {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+  const timeoutId = setTimeout(() => controller.abort(), 12000); // 12s timeout
 
   try {
     const res = await fetch(GROQ_ENDPOINT, {
@@ -92,8 +97,8 @@ async function callGroqModel(model: string, apiKey: string, userContent: string)
           { role: "user", content: userContent },
         ],
         response_format: { type: "json_object" },
-        reasoning_effort: "low", // Slashes reasoning tokens from ~600 to ~120 (38% token reduction!)
-        max_tokens: 800, // Hard ceiling prevents runaway outputs
+        reasoning_effort: effort, // "medium" on 120B for nuanced bullet rewrites; "low" on 20B for fast burst processing
+        max_tokens: 1000,
         temperature: 0.1,
       }),
     });
@@ -230,15 +235,16 @@ ${
 
     // Step 6: Execute Groq Call with Model Cascading
     let groqResponse;
+    const effort = activeModel === FLAGSHIP_MODEL ? "medium" : "low";
     try {
-      groqResponse = await callGroqModel(activeModel, apiKey, userContent);
+      groqResponse = await callGroqModel(activeModel, apiKey, userContent, effort);
       if (!groqResponse.ok && activeModel === FLAGSHIP_MODEL) {
         console.warn(`Groq ${FLAGSHIP_MODEL} error (${groqResponse.status}). Cascading to ${FAST_MODEL}...`);
         const canCascade = await reserveModelTpmBudget("20b", 1300);
         if (canCascade) {
           activeModel = FAST_MODEL;
           targetModelKey = "20b";
-          groqResponse = await callGroqModel(FAST_MODEL, apiKey, userContent);
+          groqResponse = await callGroqModel(FAST_MODEL, apiKey, userContent, "low");
         }
       }
     } catch (modelErr) {
@@ -247,7 +253,7 @@ ${
         try {
           activeModel = FAST_MODEL;
           targetModelKey = "20b";
-          groqResponse = await callGroqModel(FAST_MODEL, apiKey, userContent);
+          groqResponse = await callGroqModel(FAST_MODEL, apiKey, userContent, "low");
         } catch (fastErr) {
           console.warn(`Fallback model notice (${FAST_MODEL}):`, fastErr);
         }
