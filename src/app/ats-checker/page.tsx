@@ -43,6 +43,8 @@ function ATSCheckerContent() {
   const [targetRole, setTargetRole] = useState("sde");
   const [fileName, setFileName] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"paste" | "upload">("paste");
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [isPdfParsing, setIsPdfParsing] = useState(false);
 
   // Loading & Results
   const [isScanning, setIsScanning] = useState(false);
@@ -184,44 +186,63 @@ Responsibilities:
     if (!file) return;
 
     setFileName(file.name);
-    setIsScanning(true);
+    setUploadError(null);
 
-    if (file.type === "application/pdf") {
+    const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+
+    if (isPdf) {
+      setIsPdfParsing(true);
       try {
-        const pdfjs = await import("pdfjs-dist");
-        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        const formData = new FormData();
+        formData.append("file", file);
 
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
-        let fullText = "";
+        const res = await fetch("/api/ats/parse-pdf", {
+          method: "POST",
+          body: formData,
+        });
 
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const textContent = await page.getTextContent();
-          const pageText = textContent.items.map((item: any) => item.str).join(" ");
-          fullText += pageText + "\n";
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          setUploadError(
+            data.error ||
+              "Could not extract text from this PDF. Please switch to 'Paste Text' and paste your resume text."
+          );
+          setActiveTab("paste");
+          setIsPdfParsing(false);
+          return;
         }
 
-        setResumeText(fullText);
+        const extractedText = data.text;
+        setResumeText(extractedText);
+        setActiveTab("paste"); // Switch to paste tab so the user can verify their extracted text!
+        setIsPdfParsing(false);
 
+        // Run scans automatically
+        setIsScanning(true);
         if (scannerMode === "general") {
-          setGeneralReport(analyzeResume(fullText, targetRole));
-          executeAiScan(fullText, undefined, targetRole);
+          setGeneralReport(analyzeResume(extractedText, targetRole));
+          executeAiScan(extractedText, undefined, targetRole);
         } else if (jobDescription.trim()) {
-          setMatchReport(analyzeJobMatch(fullText, jobDescription));
-          executeAiScan(fullText, jobDescription, targetRole);
+          setMatchReport(analyzeJobMatch(extractedText, jobDescription));
+          executeAiScan(extractedText, jobDescription, targetRole);
         }
-      } catch (err) {
-        console.error("PDF Parsing error:", err);
-        alert("Could not extract text from this PDF. Please paste your resume text into the text box for an instant scan.");
-      } finally {
         setIsScanning(false);
+      } catch (err) {
+        console.error("PDF upload error:", err);
+        setUploadError(
+          "Network error while parsing PDF. Please switch to 'Paste Text' and paste your resume text directly."
+        );
+        setActiveTab("paste");
+        setIsPdfParsing(false);
       }
     } else {
+      // Plain text or markdown
       const reader = new FileReader();
       reader.onload = (event) => {
-        const text = event.target?.result as string;
+        const text = (event.target?.result as string) || "";
         setResumeText(text);
+        setActiveTab("paste");
         if (scannerMode === "general") {
           setGeneralReport(analyzeResume(text, targetRole));
           executeAiScan(text, undefined, targetRole);
@@ -230,8 +251,11 @@ Responsibilities:
           executeAiScan(text, jobDescription, targetRole);
         }
       };
+      reader.onerror = () => {
+        setUploadError("Could not read file. Please paste your resume text directly.");
+        setActiveTab("paste");
+      };
       reader.readAsText(file);
-      setIsScanning(false);
     }
   };
 
@@ -277,6 +301,8 @@ Responsibilities:
     setJobDescription("");
     setSelectedJobId("");
     setFileName(null);
+    setUploadError(null);
+    setIsPdfParsing(false);
     setGeneralReport(null);
     setMatchReport(null);
     setAiReport(null);
@@ -626,6 +652,23 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
             </div>
           </div>
 
+          {/* Upload Error Alert Callout (if unreadable or scanned PDF) */}
+          {uploadError && (
+            <div className="p-3.5 bg-rose-500/10 border border-rose-500/25 rounded-2xl flex items-center justify-between text-xs text-rose-300 animate-in fade-in duration-200">
+              <div className="flex items-center gap-2.5">
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                <span>{uploadError}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setUploadError(null)}
+                className="text-neutral-400 hover:text-white px-2 py-0.5 text-xs font-semibold"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
+
           {activeTab === "paste" ? (
             <textarea
               rows={8}
@@ -636,29 +679,41 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
             />
           ) : (
             <div className="border border-dashed border-white/15 hover:border-white/30 rounded-2xl p-8 sm:p-12 text-center transition bg-[#121214] space-y-3">
-              <div className="w-12 h-12 rounded-full bg-white/5 mx-auto flex items-center justify-center text-neutral-300">
-                <Upload className="w-5 h-5 text-blue-400" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">
-                  {fileName ? fileName : "Upload your resume PDF"}
-                </p>
-                <p className="text-xs text-neutral-400 mt-1">
-                  Private & secure. Text is processed in-memory with personal contact details stripped.
-                </p>
-              </div>
-              <div>
-                <label className="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition shadow">
-                  <span>Browse PDF</span>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".pdf,.txt"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                </label>
-              </div>
+              {isPdfParsing ? (
+                <div className="py-6 flex flex-col items-center justify-center space-y-3">
+                  <RefreshCw className="w-8 h-8 text-blue-400 animate-spin" />
+                  <div>
+                    <p className="text-sm font-semibold text-white">Extracting text from PDF...</p>
+                    <p className="text-xs text-neutral-400 mt-0.5">Reading layout and text streams safely</p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="w-12 h-12 rounded-full bg-white/5 mx-auto flex items-center justify-center text-neutral-300">
+                    <Upload className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">
+                      {fileName ? fileName : "Upload your resume PDF"}
+                    </p>
+                    <p className="text-xs text-neutral-400 mt-1">
+                      Private & secure. Text is processed in-memory with personal contact details stripped.
+                    </p>
+                  </div>
+                  <div>
+                    <label className="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 text-xs font-semibold px-4 py-2 rounded-full cursor-pointer transition shadow">
+                      <span>Browse PDF</span>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".pdf,.txt"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
