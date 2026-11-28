@@ -1,5 +1,565 @@
 [
   {
+    "id": "113",
+    "slug": "akamai-early-career-engineer-4658",
+    "company": "Akamai Technologies",
+    "role": "Early-Career Engineer",
+    "category": "Software",
+    "badge": "Hot",
+    "logoBg": "bg-sky-600",
+    "location": "Remote (India)",
+    "jobType": "Remote",
+    "batch": [
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "salary": "₹8.0 - ₹14.0 LPA (Best in Industry)",
+    "experience": "0–2 Years / Freshers Eligible",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP (Active Hiring)",
+    "applyUrl": "https://fa-extu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/4658",
+    "eligibility": [
+      "Bachelor’s degree in Computer Science, Information Technology, Engineering, or related technical discipline",
+      "0–2 years of relevant software engineering or systems experience (freshers and recent grads eligible)",
+      "Strong coding foundation in Python, Go, Java, or C/C++",
+      "Understanding of REST APIs, distributed cloud systems, and Linux environments",
+      "Excellent analytical problem solving and communication skills"
+    ],
+    "description": "Akamai is hiring Early-Career Engineers to join their Cloud Platform and Linode API development team. You will help build and scale developer-facing cloud infrastructure, implement high-performance APIs, and collaborate with globally distributed engineering squads on impactful cloud reliability initiatives.",
+    "responsibilities": [
+      "Contribute to the design and implementation of Linode cloud management APIs and platform microservices.",
+      "Write clean, maintainable, and high-performance backend code with comprehensive test coverage.",
+      "Collaborate across cross-functional engineering teams in an agile, sprint-driven workflow.",
+      "Participate in technical design discussions, peer code reviews, and production monitoring.",
+      "Troubleshoot API latency issues and optimize distributed cloud service availability."
+    ],
+    "requirements": [
+      "Solid knowledge of computer science fundamentals: Data Structures, Algorithms, and OS concepts.",
+      "Proficiency in at least one modern language such as Python, Go, Java, or C++.",
+      "Familiarity with Git, Linux CLI, and HTTP/RESTful communication standards.",
+      "Enthusiasm for building developer tools and hyperscale cloud infrastructure."
+    ],
+    "selectionProcess": [
+      "Round 1: Online Technical Assessment (Data Structures, Algorithms & Cloud Concepts)",
+      "Round 2: Technical Interview (Coding, System Fundamentals & API Design)",
+      "Round 3: Engineering Manager & Cultural Fitment Discussion"
+    ],
+    "snehalTips": "Akamai Linode APIs prioritize low latency, clean API architecture, and Linux proficiency. Highlight any hands-on experience with REST APIs, cloud deployments (Docker, AWS/GCP/Linode), and scalable backend projects on your 1-page resume.",
+    "featured": true,
+    "tags": [
+      "Akamai",
+      "Early-Career",
+      "Remote",
+      "Cloud",
+      "Python",
+      "Go",
+      "APIs",
+      "Linode"
+    ]
+  },
+  {
+    "id": "112",
+    "slug": "razorpay-analyst-business-operations-4757678005",
+    "company": "Razorpay",
+    "role": "Analyst – Business Operations",
+    "category": "Non-Tech",
+    "badge": "Active",
+    "logoBg": "bg-blue-600",
+    "location": "Bangalore",
+    "jobType": "Full-Time",
+    "batch": [
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "salary": "₹4.0 - ₹6.0 LPA",
+    "experience": "Freshers / 0-1 Year Experience",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4757678005",
+    "eligibility": [
+      "Bachelor’s or Master’s degree in Business, Commerce, Economics, Engineering, or relevant stream",
+      "Freshers and candidates with 0–1 year of operations or analytics experience eligible",
+      "Proficiency in Microsoft Excel / Google Sheets and basic SQL / data analysis",
+      "Sharp attention to detail and process optimization mindset",
+      "Strong written and verbal English communication skills"
+    ],
+    "description": "Razorpay is seeking an Associate / Analyst in Business Operations based in Bangalore. In this role, you will streamline merchant onboarding, manage operational payment workflows, resolve complex transaction exceptions, and collaborate with product and banking partners to uphold high financial operations standards.",
+    "responsibilities": [
+      "Manage end-to-end payment operations workflows and merchant account queries.",
+      "Perform daily reconciliation, process audits, and risk assessment checks.",
+      "Analyze operational metrics to identify payment gateway drop-offs and process bottlenecks.",
+      "Coordinate with banking partners and internal risk & compliance teams.",
+      "Draft SOPs and recommend automated improvements to legacy manual workflows."
+    ],
+    "requirements": [
+      "Strong quantitative aptitude with proficiency in spreadsheet modeling (VLOOKUP, Pivot Tables).",
+      "Basic understanding of payment ecosystems (UPI, Netbanking, Cards, Gateways).",
+      "High ownership mindset and ability to work in fast-paced fintech environments."
+    ],
+    "selectionProcess": [
+      "Round 1: Screening & Aptitude / Analytical Assessment",
+      "Round 2: Operations Case Study & Problem-Solving Interview",
+      "Round 3: Team Lead & Culture Fitment Discussion"
+    ],
+    "snehalTips": "Fintech operations look for extreme attention to detail and comfort with numbers. Highlight Excel, SQL, or operations internship experience on your resume, and familiarize yourself with Razorpay’s core payment gateway offerings.",
+    "featured": true,
+    "tags": [
+      "Razorpay",
+      "Business Operations",
+      "Analyst",
+      "Fintech",
+      "Bangalore",
+      "Excel",
+      "Freshers"
+    ]
+  },
+  {
+    "id": "111",
+    "slug": "eaton-it-apprentice-development-program-687240496341",
+    "company": "Eaton",
+    "role": "IT Apprentice – Development Program",
+    "category": "Software",
+    "badge": "Active",
+    "logoBg": "bg-blue-800",
+    "location": "Pune",
+    "jobType": "Full-Time",
+    "batch": [
+      "2025",
+      "2026"
+    ],
+    "salary": "Competitive Paid Apprenticeship",
+    "experience": "Freshers / Recent Graduates",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://eaton.eightfold.ai/careers/job/687240496341?domain=eaton.com",
+    "eligibility": [
+      "Bachelor’s degree in Engineering, Information Technology, Computer Science, or related fields",
+      "Eligible graduation batches: 2025 and 2026",
+      "Good academic standing and solid understanding of IT enterprise systems and software lifecycle",
+      "Eagerness to undergo structured global IT rotations and mentorship"
+    ],
+    "description": "Eaton Corporation is hiring IT Apprentices for their IT Development Program in Pune. As an apprentice, you will gain hands-on corporate IT experience across enterprise infrastructure, cloud applications, cybersecurity, and digital business solutions under the guidance of senior technical mentors.",
+    "responsibilities": [
+      "Participate in agile software development, enterprise application maintenance, and cloud migrations.",
+      "Assist in system configuration, automated testing, and IT service incident resolution.",
+      "Collaborate with international business teams to document technical requirements.",
+      "Support continuous improvement projects and IT security compliance initiatives."
+    ],
+    "requirements": [
+      "Fundamental knowledge of programming (Java, Python, C#, or web technologies) and relational databases.",
+      "Strong logical reasoning, analytical troubleshooting, and collaborative communication.",
+      "Willingness to learn enterprise platforms like SAP, Microsoft Azure, and ServiceNow."
+    ],
+    "selectionProcess": [
+      "Round 1: Online Technical & Cognitive Aptitude Test",
+      "Round 2: Technical Interview (Core IT Concepts, Programming & Project Walkthrough)",
+      "Round 3: HR & Program Fitment Interview"
+    ],
+    "snehalTips": "Eaton places heavy emphasis on continuous learning, structured engineering disciplines, and safety. Highlight your engineering projects, database fundamentals, and willingness to work across full lifecycle enterprise systems.",
+    "featured": true,
+    "tags": [
+      "Eaton",
+      "IT Apprentice",
+      "Pune",
+      "Software",
+      "Enterprise IT",
+      "Freshers",
+      "2025 Batch",
+      "2026 Batch"
+    ]
+  },
+  {
+    "id": "110",
+    "slug": "fampay-backend-engineering-intern",
+    "company": "FamPay",
+    "role": "Backend Engineering Intern",
+    "category": "Internship",
+    "badge": "Hot",
+    "logoBg": "bg-amber-500",
+    "location": "Bengaluru",
+    "jobType": "Internship",
+    "batch": [
+      "2025",
+      "2026",
+      "2027"
+    ],
+    "salary": "₹25,000 - ₹40,000/month (Competitive Stipend)",
+    "experience": "Students / Early Career Backend Aspirants",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://jobs.lever.co/fampay/cf014ef0-218a-4041-a238-ff91c7b9a5bc",
+    "eligibility": [
+      "Students currently pursuing B.Tech / BE / MCA in Computer Science or related fields (Batches 2025, 2026, 2027)",
+      "Strong command of backend languages: Python, Java, or Node.js / JavaScript",
+      "Solid foundation in Data Structures, Algorithms, and Object-Oriented Programming",
+      "Demonstrated personal projects or prior internship building backend APIs"
+    ],
+    "description": "FamPay (famapp) is hiring a Backend Engineering Intern in Bengaluru. You will work directly with the core engineering team building scalable fintech services for millions of Gen-Z teenagers, designing microservices, optimizing database transactions, and writing robust production APIs.",
+    "responsibilities": [
+      "Design, implement, and maintain scalable REST/gRPC backend microservices.",
+      "Optimize SQL/NoSQL database queries, indexes, and caching strategies (Redis, PostgreSQL).",
+      "Write clean, modular code with unit tests and API documentation.",
+      "Help scale fintech transactional infrastructure with high security and low latency."
+    ],
+    "requirements": [
+      "Strong hands-on programming experience with Python (Django/FastAPI), Java (Spring Boot), or Node.js.",
+      "Good understanding of relational databases (PostgreSQL/MySQL) and caching systems.",
+      "Familiarity with Git and clean version control practices.",
+      "High energy and passion for consumer-tech products."
+    ],
+    "selectionProcess": [
+      "Round 1: Machine Coding / Take-home Assignment",
+      "Round 2: Technical Deep Dive (DSA, DB Design, Backend Architecture)",
+      "Round 3: Founder / Engineering Leader Culture Fitment"
+    ],
+    "snehalTips": "FamPay has an intense engineering culture that values builders. Provide GitHub links to backend projects that handle authentication, databases, or API integrations rather than basic tutorial clones.",
+    "featured": true,
+    "tags": [
+      "FamPay",
+      "Backend",
+      "Internship",
+      "Bengaluru",
+      "Python",
+      "Java",
+      "DSA",
+      "Fintech"
+    ]
+  },
+  {
+    "id": "109",
+    "slug": "rubrik-software-engineer-ui-winter-intern-8413157",
+    "company": "Rubrik",
+    "role": "Software Engineer (UI) – Winter Intern",
+    "category": "Internship",
+    "badge": "Hot",
+    "logoBg": "bg-emerald-700",
+    "location": "Bengaluru",
+    "jobType": "Internship",
+    "batch": [
+      "2027"
+    ],
+    "salary": "₹80,000 - ₹1,00,000/month (Industry-Leading Stipend)",
+    "experience": "2027 Graduates (BE/BTech or ME/MTech – CS & Circuit Branches)",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://job-boards.greenhouse.io/rubrik/jobs/8413157",
+    "eligibility": [
+      "Enrolled in full-time BE/BTech or ME/MTech graduating in 2027 (Circuit branches: CSE, IT, ECE, EEE)",
+      "Strong academic record with no active backlogs",
+      "Available for a full-time 5-month on-site internship in Bengaluru from January to May 2027",
+      "Proficient in modern web technologies: JavaScript, TypeScript, React, HTML5, CSS3",
+      "Solid understanding of computer science principles, data structures, and algorithms"
+    ],
+    "description": "Rubrik, the Zero Trust Data Security leader, is looking for a Software Engineer (UI) Winter Intern in Bengaluru for the January – May 2027 cohort. You will build cutting-edge enterprise dashboard interfaces, real-time cyber recovery visualizations, and performant web components that serve Fortune 500 enterprises.",
+    "responsibilities": [
+      "Develop interactive, high-performance UI components in React and TypeScript.",
+      "Collaborate with UX designers and backend engineers to define API contracts and frontend workflows.",
+      "Implement responsive layouts with strict focus on web performance, accessibility, and clean architecture.",
+      "Participate in design critiques, code reviews, and enterprise unit/integration testing."
+    ],
+    "requirements": [
+      "Hands-on expertise in JavaScript/TypeScript, React.js, and CSS preprocessors/Tailwind.",
+      "Understanding of asynchronous request handling, REST APIs, and client-side caching.",
+      "Sound knowledge of Data Structures and Problem Solving.",
+      "Eagerness to innovate in the enterprise cybersecurity and data governance domain."
+    ],
+    "selectionProcess": [
+      "Round 1: Online Coding Assessment (DSA + Frontend JavaScript Concepts)",
+      "Round 2: Technical Interview 1 (Data Structures, Problem Solving & Algorithms)",
+      "Round 3: Technical Interview 2 (UI Architecture, React Hands-on & Web Performance)",
+      "Round 4: Managerial & Fitment Discussion"
+    ],
+    "snehalTips": "Rubrik is a top-tier tier-1 company paying industry-leading stipends. Their assessment tests DSA string/array/graph manipulation heavily along with React component state design. Ensure your 2027 graduation year is clearly noted at the top of your resume.",
+    "featured": true,
+    "tags": [
+      "Rubrik",
+      "UI Intern",
+      "React",
+      "TypeScript",
+      "Bengaluru",
+      "2027 Batch",
+      "Internship",
+      "Frontend"
+    ]
+  },
+  {
+    "id": "108",
+    "slug": "fourkites-intern-community-documentation-8370603",
+    "company": "FourKites",
+    "role": "Intern – Community & Documentation",
+    "category": "Internship",
+    "badge": "Active",
+    "logoBg": "bg-indigo-600",
+    "location": "Chennai",
+    "jobType": "Internship",
+    "batch": [
+      "2025",
+      "2026",
+      "2027"
+    ],
+    "salary": "₹30,000/month (Stipend)",
+    "experience": "CS / Engineering / IT Students (6 Months)",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://job-boards.greenhouse.io/fourkites/jobs/8370603",
+    "eligibility": [
+      "Students currently enrolled in Computer Science, IT, Engineering, or Communications degrees",
+      "Available for a 6-month full-time internship at the FourKites Chennai office",
+      "Strong technical writing, API documentation, and community engagement abilities",
+      "Basic understanding of software architectures, APIs, and product workflows"
+    ],
+    "description": "FourKites, the global leader in supply chain visibility, is hiring an Intern for Community & Documentation in Chennai. You will help create world-class developer docs, manage technical knowledge bases, and coordinate with engineering and product teams to facilitate smooth user onboarding.",
+    "responsibilities": [
+      "Write and curate developer documentation, API guides, release notes, and troubleshooting tutorials.",
+      "Engage with user communities, address product queries, and gather feedback for product managers.",
+      "Audit existing technical documentation for accuracy, formatting, and search discoverability.",
+      "Collaborate with software engineers to test APIs and translate complex code concepts into intuitive guides."
+    ],
+    "requirements": [
+      "Exceptional English technical writing and editing skills.",
+      "Basic familiarity with Markdown, Git, Swagger/OpenAPI, and web technologies.",
+      "Curiosity about logistics tech, IoT tracking, and SaaS product operations."
+    ],
+    "selectionProcess": [
+      "Round 1: Portfolio / Writing Sample Review",
+      "Round 2: Technical Writing Assessment (Doc Task)",
+      "Round 3: Manager Interview & Fitment Round"
+    ],
+    "snehalTips": "A monthly stipend of ₹30k for a technical documentation and community role is exceptional for students in Chennai. Submit links to any blogs, README files, or technical docs you have written alongside your resume.",
+    "featured": true,
+    "tags": [
+      "FourKites",
+      "Documentation",
+      "Community",
+      "Internship",
+      "Chennai",
+      "Technical Writing",
+      "SaaS"
+    ]
+  },
+  {
+    "id": "107",
+    "slug": "piramal-pharma-apprentice-procurement-operations",
+    "company": "Piramal Pharma",
+    "role": "Apprentice – Procurement Operations (GBSS)",
+    "category": "Non-Tech",
+    "badge": "Active",
+    "logoBg": "bg-orange-600",
+    "location": "Mumbai",
+    "jobType": "Full-Time",
+    "batch": [
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "salary": "Paid Apprenticeship",
+    "experience": "Freshers / Graduates",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://piramalpharma.wd102.myworkdayjobs.com/piramal_external_careers/job/Mumbai-MH/GBSS---Apprentice-Procurement-Operations_R00005217-1",
+    "eligibility": [
+      "Graduate in Commerce, Science, Business Administration, or Engineering",
+      "Recent batches: 2024, 2025, or 2026 graduates eligible",
+      "Strong understanding of procurement fundamentals, purchase orders, and vendor management",
+      "Proficiency in Microsoft Excel and ERP navigation"
+    ],
+    "description": "Piramal Pharma Limited is hiring an Apprentice in Procurement Operations within their Global Business Services (GBSS) division in Mumbai. You will support enterprise procurement lifecycles, manage vendor invoices, audit purchase requests, and ensure seamless supply chain compliance.",
+    "responsibilities": [
+      "Process and verify Purchase Requisitions (PR) and generate Purchase Orders (PO) in enterprise ERP.",
+      "Coordinate with cross-functional supply chain stakeholders and vendors for quotation comparisons.",
+      "Track order fulfillment timelines and resolve vendor billing discrepancies.",
+      "Maintain operational procurement databases and monthly spend reports."
+    ],
+    "requirements": [
+      "Good communication skills and structured organizational capability.",
+      "Comfort with Excel formulas, data reconciliation, and reporting.",
+      "High integrity and attention to regulatory compliance standards."
+    ],
+    "selectionProcess": [
+      "Round 1: Profile Screening & Background Verification",
+      "Round 2: Operations Interview (Aptitude & Procurement Concepts)",
+      "Round 3: HR Discussion"
+    ],
+    "snehalTips": "Piramal Pharma is a leading multinational healthcare corporation. Highlight your Excel capabilities, organizational diligence, and understanding of procure-to-pay (P2P) cycles.",
+    "featured": true,
+    "tags": [
+      "Piramal Pharma",
+      "Procurement",
+      "Operations",
+      "Apprentice",
+      "Mumbai",
+      "Freshers",
+      "Supply Chain"
+    ]
+  },
+  {
+    "id": "106",
+    "slug": "digitide-customer-care-apprentice-273008",
+    "company": "Digitide",
+    "role": "Customer Care Apprentice",
+    "category": "Non-Tech",
+    "badge": "Active",
+    "logoBg": "bg-cyan-700",
+    "location": "Indore",
+    "jobType": "Full-Time",
+    "batch": [
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "salary": "Paid Apprenticeship (₹15,000 - ₹20,000/month)",
+    "experience": "High School Pass or Above / Freshers",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://iaceiz.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/273008",
+    "eligibility": [
+      "12th Standard (High School) Pass or Graduate in any stream",
+      "Freshers eligible with strong verbal and written communication in English & Hindi",
+      "Basic computer literacy, typing speed, and customer empathy",
+      "Willingness to work on-site at Indore in domestic customer lifecycle management"
+    ],
+    "description": "Digitide Solutions is hiring Customer Care Apprentices for their CLM Domestic Diversified inbound team in Indore. This apprenticeship provides formal customer relationship training, live query resolution experience, and career advancement paths in digital service management.",
+    "responsibilities": [
+      "Handle customer inbound queries regarding account services, orders, and support requests.",
+      "Maintain high first-call resolution (FCR) rates and customer satisfaction scores.",
+      "Log conversation details and ticket updates accurately in customer CRM software.",
+      "Adhere to quality benchmarks and service level agreements (SLAs)."
+    ],
+    "requirements": [
+      "Polite, empathetic, and professional communication manners.",
+      "Active listening skills and ability to troubleshoot customer problems under guidance.",
+      "Basic proficiency in Microsoft Office and typing."
+    ],
+    "selectionProcess": [
+      "Round 1: Voice & Communication Assessment",
+      "Round 2: Personal Interview & Typing Test",
+      "Round 3: Offer Rollout & Onboarding"
+    ],
+    "snehalTips": "For early starters and 12th pass/graduates in Madhya Pradesh, Digitide offers structured corporate training. Practice clear English communication and customer-first problem resolution scenarios.",
+    "featured": true,
+    "tags": [
+      "Digitide",
+      "Customer Care",
+      "Apprentice",
+      "Indore",
+      "Non-Tech",
+      "Freshers",
+      "12th Pass"
+    ]
+  },
+  {
+    "id": "105",
+    "slug": "estee-lauder-supply-chain-apprentice-1168276834818",
+    "company": "Estée Lauder Companies",
+    "role": "Supply Chain Apprentice",
+    "category": "Non-Tech",
+    "badge": "Active",
+    "logoBg": "bg-stone-900",
+    "location": "Mumbai",
+    "jobType": "Full-Time",
+    "batch": [
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "salary": "Paid Apprenticeship (1 Year)",
+    "experience": "Graduates / Postgraduates",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://careers.elcompanies.com/careers/job/1168276834818?domain=elcompanies.com",
+    "eligibility": [
+      "Bachelor’s or Master’s degree in Supply Chain, Operations, Logistics, Commerce, or Engineering",
+      "Fresh graduates from 2024, 2025, or 2026 batches",
+      "Available for a 1-year full-time paid apprenticeship in Mumbai",
+      "Analytical mindset with familiarity in inventory management and Excel modeling"
+    ],
+    "description": "The Estée Lauder Companies (ELC), the global prestige beauty powerhouse, is hiring a Supply Chain Apprentice in Mumbai for a 1-year paid tenure. You will work across demand planning, logistics distribution, inventory tracking, and warehouse operations for premium luxury global brands.",
+    "responsibilities": [
+      "Assist supply chain managers in demand forecasting and stock replenishment planning.",
+      "Track inbound shipments, customs clearances, and warehouse inventory counts.",
+      "Analyze logistics lead times and prepare weekly supply chain operational dashboards.",
+      "Coordinate with brand managers to support seasonal product launches and retail distribution."
+    ],
+    "requirements": [
+      "Strong analytical skills with proficiency in Microsoft Excel (Pivot tables, Lookups, Charts).",
+      "Passion for luxury retail, cosmetics, and international FMCG supply chain dynamics.",
+      "Effective interpersonal and communication skills across multicultural teams."
+    ],
+    "selectionProcess": [
+      "Round 1: Profile Screening & Online Aptitude Test",
+      "Round 2: Supply Chain Case Study & Operations Interview",
+      "Round 3: HR & Leadership Fitment Interview"
+    ],
+    "snehalTips": "Estée Lauder owns MAC, Clinique, and Bobbi Brown. When applying, showcase an understanding of FMCG/luxury retail distribution, seasonal inventory stockouts, and clean data analysis in Excel.",
+    "featured": true,
+    "tags": [
+      "Estée Lauder",
+      "Supply Chain",
+      "Apprentice",
+      "Mumbai",
+      "Operations",
+      "Logistics",
+      "Luxury Retail"
+    ]
+  },
+  {
+    "id": "104",
+    "slug": "estee-lauder-retail-projects-apprentice-1168276834892",
+    "company": "Estée Lauder Companies",
+    "role": "Retail Projects Apprentice",
+    "category": "Non-Tech",
+    "badge": "Active",
+    "logoBg": "bg-stone-800",
+    "location": "Mumbai",
+    "jobType": "Full-Time",
+    "batch": [
+      "2024",
+      "2025",
+      "2026"
+    ],
+    "salary": "Paid Apprenticeship (6 Months)",
+    "experience": "Eligible Graduates",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://careers.elcompanies.com/careers/job/1168276834892?domain=elcompanies.com",
+    "eligibility": [
+      "Graduate in Architecture, Design, Retail Management, Business, or related fields",
+      "Eligible graduation batches: 2024, 2025, 2026",
+      "Available for a 6-month paid apprenticeship in Mumbai",
+      "Keen interest in luxury store design, visual merchandising, and retail project rollouts"
+    ],
+    "description": "The Estée Lauder Companies is looking for a Retail Projects Apprentice in Mumbai for a 6-month paid assignment. You will assist the store design and retail project team in coordinating boutique store openings, visual merchandising installations, and vendor fit-out execution across India.",
+    "responsibilities": [
+      "Support the planning, scheduling, and execution of new retail boutique store launches.",
+      "Coordinate with local contractors, fit-out vendors, and brand visual merchandising leads.",
+      "Track project budgets, site inspection checklists, and material delivery milestones.",
+      "Prepare project update presentations for corporate retail leadership."
+    ],
+    "requirements": [
+      "Exceptional project coordination, aesthetic eye, and multi-tasking skills.",
+      "Basic understanding of spatial planning, floor layouts, or CAD/visual tools is a plus.",
+      "Proactive, organized, and confident communication with vendors and team members."
+    ],
+    "selectionProcess": [
+      "Round 1: Resume & Design/Project Portfolio Screening",
+      "Round 2: Retail Design / Project Coordination Discussion",
+      "Round 3: HR & Cultural Fitment Discussion"
+    ],
+    "snehalTips": "Retail project management requires strong coordination between visual aesthetics and timeline execution. Mention any experience in event management, design projects, or operational logistics in your resume.",
+    "featured": true,
+    "tags": [
+      "Estée Lauder",
+      "Retail Projects",
+      "Store Design",
+      "Apprentice",
+      "Mumbai",
+      "Luxury",
+      "Merchandising"
+    ]
+  },
+  {
     "id": "103",
     "slug": "wayfair-machine-learning-intern-21687",
     "company": "Wayfair",
