@@ -1,5 +1,70 @@
 [
   {
+    "id": "103",
+    "slug": "wayfair-machine-learning-intern-21687",
+    "company": "Wayfair",
+    "role": "Machine Learning Intern",
+    "category": "Data & AI",
+    "badge": "Hot",
+    "logoBg": "bg-purple-700",
+    "location": "Bangalore, India",
+    "jobType": "Internship",
+    "batch": [
+      "2025",
+      "2026",
+      "2027"
+    ],
+    "salary": "₹50,000 - ₹80,000/month (Stipend)",
+    "experience": "Freshers / M.Tech / MS / B.Tech",
+    "postedDate": "Today",
+    "deadline": "Apply ASAP",
+    "applyUrl": "https://www.wayfair.com/careers/job/machine-learning-intern/2-21687?gh_src=&source=",
+    "eligibility": [
+      "Currently enrolled in a full-time M.Tech, MS, B.Tech, or equivalent program in Computer Science, Data Science, Machine Learning, Statistics, or Mathematics",
+      "Eligible graduation batches: 2025, 2026, 2027",
+      "Strong understanding of machine learning fundamentals, statistics, probability, and algorithms",
+      "Hands-on programming experience in Python and data science libraries (Pandas, NumPy, Scikit-learn, PyTorch)",
+      "Solid exposure to SQL and working with structured and semi-structured datasets",
+      "Interest in applying machine learning to real-world e-commerce search, recommendation, and agentic workflows"
+    ],
+    "description": "Wayfair is hiring a Machine Learning Intern for their Customer Technology (CT) team in Bangalore. You will work alongside ML scientists, data scientists, and engineers to build machine learning products that power predictive search guidance, query rewriting, LLM-based customer understanding, and recommendation systems across Wayfair's e-commerce marketplace at web scale.",
+    "responsibilities": [
+      "Contribute to the design, development, evaluation, and refinement of machine learning models that solve real-world customer and e-commerce challenges.",
+      "Analyze large-scale behavioral, search, and recommendation datasets to discover patterns, trends, and optimization opportunities.",
+      "Apply ML techniques such as classification, regression, ranking, recommendations, forecasting, NLP, and deep learning.",
+      "Support end-to-end feature engineering, model training, offline experimentation, and performance evaluation.",
+      "Design, build, and deploy agentic workflows using emerging AI and LLM frameworks to solve complex business problems.",
+      "Communicate findings, experimental results, and architectural recommendations clearly to cross-functional stakeholders."
+    ],
+    "requirements": [
+      "Enrolled in M.Tech, MS, B.Tech or equivalent in CS, Data Science, ML, AI, Statistics, or Mathematics.",
+      "Solid programming foundation in Python with data science packages (Pandas, NumPy, Scikit-Learn, PyTorch, TensorFlow).",
+      "Hands-on experience writing SQL queries to manipulate and extract insights from large relational tables.",
+      "Fundamental understanding of supervised and unsupervised learning, loss functions, evaluation metrics (NDCG, MAP, F1, AUC), and regression/classification.",
+      "Strong analytical problem-solving mindset and eagerness to learn modern LLM-driven e-commerce applications.",
+      "Clear written and verbal communication skills."
+    ],
+    "selectionProcess": [
+      "Round 1: Online Coding & Machine Learning Assessment",
+      "Round 2: Technical Interview (Machine Learning Fundamentals, Python, SQL, DSA)",
+      "Round 3: Applied ML / Project Discussion & Culture Fitment Round"
+    ],
+    "snehalTips": "Wayfair Customer Technology specifically highlights query understanding, search suggestions, and agentic workflows using LLMs. When applying, ensure your resume highlights practical NLP or Recommender projects with quantified metrics (e.g., latency benchmarks, ranking metrics like NDCG or MRR). Mention your proficiency in Python and SQL prominently in your skills section.",
+    "featured": true,
+    "tags": [
+      "Wayfair",
+      "Machine Learning",
+      "Data & AI",
+      "Internship",
+      "Bangalore",
+      "Python",
+      "NLP",
+      "LLM",
+      "SQL",
+      "Recommender Systems"
+    ]
+  },
+  {
     "id": "102",
     "slug": "solenis-data-analyst-8802",
     "company": "Solenis",
