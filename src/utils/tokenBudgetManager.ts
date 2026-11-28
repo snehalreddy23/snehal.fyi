@@ -100,14 +100,14 @@ export async function adjustModelTpmBudget(modelKey: "120b" | "20b", actualToken
 }
 
 /**
- * Dual-Key Rate Limiter (Session ID + Campus NAT IP Ceiling)
+ * Dual-Key Rate Limiter (Session ID + IP Ceiling: 10 tries per hour)
  */
 export async function checkDistributedDualRateLimit(
   sessionId: string,
   clientIp: string
 ): Promise<{ allowed: boolean; minutesUntilReset: number }> {
-  const MAX_SESSION = 5;
-  const MAX_IP = 50;
+  const MAX_SESSION = 10;
+  const MAX_IP = 10;
   const now = Date.now();
 
   if (REDIS_URL && REDIS_TOKEN) {

@@ -163,7 +163,7 @@ export async function POST(request: Request) {
         sanitizedResume,
         targetJobContext,
         role,
-        `Hourly AI Scan Limit (5/5 used). Displaying instant Heuristic Rules report. Full AI reset in ${minutesUntilReset} min${minutesUntilReset > 1 ? "s" : ""}.`
+        `Hourly AI Scan Limit (10/10 used). Displaying instant Heuristic Rules report. Full AI reset in ${minutesUntilReset} min${minutesUntilReset > 1 ? "s" : ""}.`
       );
       return NextResponse.json({
         success: true,
