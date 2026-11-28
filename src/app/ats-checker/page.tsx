@@ -984,48 +984,6 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
             </ul>
           </div>
 
-          {/* Want Us to Personally Tailor Your Resume? CTA */}
-          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-blue-500/30 bg-blue-500/[0.03] space-y-5 shadow-2xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-              <div className="space-y-2 max-w-xl">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>1-on-1 Personalized Optimization</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Want Us to Personally Tailor Your Resume for This Role?
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                  Have your resume reviewed & matched to this exact Job Description by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We incorporate relevant missing skills naturally, rewrite your bullets with quantifiable impact, and optimize for top ATS performance.
-                </p>
-                <div className="pt-1 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-400">
-                  <span className="flex items-center gap-1 text-neutral-300">✓ Targeted JD Keyword Alignment</span>
-                  <span className="flex items-center gap-1 text-neutral-300">✓ Google X-Y-Z Bullet Phrasing</span>
-                  <span className="flex items-center gap-1 text-neutral-300">✓ Delivered in 24–48 Hours</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-start sm:items-end gap-2 flex-shrink-0">
-                <div className="text-left sm:text-right">
-                  <span className="text-[10px] uppercase font-bold text-neutral-400 block tracking-wider">
-                    Fresher Student Price
-                  </span>
-                  <span className="text-2xl font-extrabold text-white">₹299</span>
-                  <span className="text-xs text-neutral-500 line-through ml-2">₹999</span>
-                </div>
-                <a
-                  href="https://forms.gle/example"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-neutral-200 font-semibold text-xs px-6 py-3 rounded-full transition shadow-lg w-full sm:w-auto active:scale-95"
-                >
-                  <span>Request Tailoring (Google Form)</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-          </div>
-
           {/* Bottom Clear & Scan Another Button */}
           <div className="flex justify-center pt-2">
             <button
@@ -1281,48 +1239,6 @@ SECTION 3: METRIC DEFENSE SCRIPTS (How to defend each percentage/number in a liv
                   )}
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Want Us to Personally Tailor Your Resume? CTA */}
-          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-blue-500/30 bg-blue-500/[0.03] space-y-5 shadow-2xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-              <div className="space-y-2 max-w-xl">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>1-on-1 Personalized Optimization</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Want Us to Personally Tailor Your Resume?
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                  Get your resume reviewed & optimized by <strong className="text-white font-medium">Snehal Reddy</strong> (Data Engineer @ Snowflake). We rewrite your project bullets using the Google X-Y-Z formula, eliminate ATS parsing pitfalls, and maximize your interview callback rate.
-                </p>
-                <div className="pt-1 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-400">
-                  <span className="flex items-center gap-1 text-neutral-300">✓ 1-Page ATS Single Column</span>
-                  <span className="flex items-center gap-1 text-neutral-300">✓ Google X-Y-Z Bullet Phrasing</span>
-                  <span className="flex items-center gap-1 text-neutral-300">✓ Delivered in 24–48 Hours</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-start sm:items-end gap-2 flex-shrink-0">
-                <div className="text-left sm:text-right">
-                  <span className="text-[10px] uppercase font-bold text-neutral-400 block tracking-wider">
-                    Fresher Student Price
-                  </span>
-                  <span className="text-2xl font-extrabold text-white">₹299</span>
-                  <span className="text-xs text-neutral-500 line-through ml-2">₹999</span>
-                </div>
-                <a
-                  href="https://forms.gle/example"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-neutral-200 font-semibold text-xs px-6 py-3 rounded-full transition shadow-lg w-full sm:w-auto active:scale-95"
-                >
-                  <span>Request Tailoring (Google Form)</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </div>
           </div>
 
